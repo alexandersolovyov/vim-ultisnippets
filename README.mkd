@@ -1,0 +1,143 @@
+<!--markdownlint-disable MD033 MD034-->
+
+# Snippets-UltiSnips or UltiSnippets - my snippets for UltiSnips
+
+Here are my snippets to make programing and editing different files with Vim
+quicker.
+
+Snippets are supported with help files.
+
+## What kind of files supported
+
+### CSS
+
+Snippets for CSS files are very similar to Emmet CSS snippets, but with few
+differences. I made them because *emmet-vim* plugin is not so practical for CSS
+files for me.
+
+If You are familiar with **emmet-vim** or Emmet plugin for another editor or
+IDE, folowing features are differs this UltiSnips-based snippets from Emmet.
+
+Features for editing CSS:
+
+- Optional values are always visually selected - so You can easily change them
+  and move between them with movement trigger keys (<kbd>ctrl-j</kbd> and
+  <kbd>ctrl-k</kbd> by default).
+- If You try to expand unexistant abbreviation - it just will not expand and
+  entered symbols will remain on the string.
+- You can enter property value only after a colon (<kbd>:</kbd>), so `mt1em`
+  will not expand, while `mt:1em` will.
+- You can add any value next to CSS property name abbreviation - there is no
+  validation here. For example, if You have entered `c:white` and pressed
+  your expand trigger key (<kbd>Tab</kbd> by default), this will not disappear
+  and will expand to `color: white`; `c:rgb(100,150,200)` will also expand
+  properly, You are not forced to type `c:#000` (or other numeric value).
+- For any property with multiple values, this values can be entered after
+  abbreviation and colon sign, separated by spaces or commas, or both. For
+  example: `m:1em 2em` will expand to `margin: 1em 2em;`.
+- Set of snippets defers from original Emmet: there are no abbreviations for
+  very bad supported properties, and added abbreviations for some new properties
+  (for Grid, as an example).
+- Few abbreviations defers from original Emmet - abbreviations for property
+  values at most.
+- When snippet has expanded, and that snippet needs You to finish the string -
+  it will not add a semicolon or a closing bracket after cursor.
+
+### HTML
+
+This snippets are not similar to Emmet, though few of them may be almost
+similar. If You still need Emmet, You can install it from
+[it's github page](http://mattn.github.io/emmet-vim) and use it along with
+UltiSnips and this *snippets-ultisnips* if You like.
+See help files for information.
+
+## Installation
+
+I assume that You are using one of Linux desktop PCs, but this also must work
+under MacOS.
+
+### Install UltiSnips
+
+You must have VIM installed (of course), and UltiSnips plugin installed in it.
+How to install UltiSnips using Vundle - You can see at
+[it's page at GitHub](https://github.com/SirVer/ultisnips).
+If You are using different plugin manager - installation process is usually
+similar - read documentation for your plugin. If You're not using any plugin
+manager - it's better to use one, or read VIM documentation how to install
+plugins with no manager.
+
+### Make some preparations
+
+You need to create special folder for this snippets. If You already have
+snippets and don't want to delete them - don't bother, just make one more
+folder. But don't use name '*snippets*' for snippets folder - this is UltiSnips'
+limitation! For example:
+
+~~~sh
+mkdir ~/.vim/ultisnippets
+~~~
+
+Then You need to add this folder to the list of snippets folders in Your
+`.vimrc`:
+
+~~~vim
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/ultisnippets']
+~~~
+
+You can add multiple comma-separated paths like this, and UltiSnips will scan
+all these folders for snippets.
+
+And don't forget to set up values for UltiSnips in Your `.vimrc` file:
+
+Define keys, for example:
+
+~~~vim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-p>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+~~~
+
+And optionally - vertical window splitting when editing snippets for current
+file with `:UltiSnipsEdit` command:
+
+~~~vim
+let g:UltiSnipsEditSplit="vertical"
+~~~
+
+### Copy files
+
+Go into folder that You have created for this Ultisnippets, and clone repository
+contents in it, like this:
+
+~~~sh
+cd ~/.vim/ultisnippets
+git clone "https://github.com/alexandersolovyov/snippets-ultisnips"
+~~~
+
+-Or download and unpack repo contents there.
+
+### Update help
+
+Only russian help files are written for now.
+
+To add new help files and index them, just run script from snippets folder:
+
+~~~sh
+./refresh_doc.sh
+~~~
+
+You may need to make this file executable before, or run it with `sh` command.
+
+## Usage
+
+Simply type an abbreviation of needed construction, and press <kbd>Tab</kbd> (or
+your trigger key).
+
+For more information see help files in vim with `:help` command. Help names
+always begins on file type name and ends with '-snippets'. For example:
+
+~~~vim
+:h css-snippets
+:h html-snippets
+~~~

@@ -1,0 +1,98 @@
+# ---Multi-line elements
+
+snippet '<(\w+).*>$' "Close multi-line element" r
+`!p snip.rv=match.group(0)`
+	$1
+</`!p snip.rv=match.group(1)`>
+endsnippet
+
+snippet '^(<img[ \t]+.*["])|(<img$)' "IMG element" r
+`!p snip.rv=match.group(0)` src="$1"
+		 alt="$2" />
+endsnippet
+
+
+# ---Single-line elements
+
+snippet <link "Link to external file" b
+<link rel="${1:stylesheet}" type="text/${2:css}" href="$3" />
+endsnippet
+snippet <script "Link the script file" b
+<script src="$1"></script>
+endsnippet
+
+snippet '^[ \t]*(<a[ \t]+.*["])|(<a$)' "Reference element" r
+`!p snip.rv=match.group(0)` href="$1">$2</a>
+endsnippet
+
+
+# ---User Input elements
+
+snippet <but "BUTTON element for a form" b
+<button type="submit" id="$1" name="$1" value="$2">
+	$3
+</button>
+endsnippet
+
+snippet '<but i' "BUTTON element with ID only (for script)" b
+<button id="$1">$2</button>
+endsnippet
+
+snippet <in "Simple INPUT element" b
+<input type="$1" name="$2" value="$3"$4 />
+endsnippet
+
+snippet '<in i' "INPUT element with ID" b
+<input type="$1" id="$2" name="$2" value="$3"$4 />
+endsnippet
+
+
+# ---Attributes
+
+snippet c= "class=" w
+class="$1"
+endsnippet
+
+snippet i= "id=" w
+id="$1"
+endsnippet
+
+snippet n= "name=" w
+name="$1"
+endsnippet
+
+snippet 'pl(ace)?=' "placeholder=" r
+placeholder="$1"
+endsnippet
+
+snippet on "action=" w
+on${1:click}="$2"
+endsnippet
+
+
+# ---Constructions
+
+snippet <! "DOCTYPE definition" b
+<!DOCTYPE html>
+
+endsnippet
+
+snippet <html "HTML page structure" b
+<html dir="ltr" lang="${1:ru}">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>$2</title>
+	$3
+</head>
+<body>
+	$4
+</body>
+</html>
+endsnippet
+
+#===============================================================
+# In visual mode - surround by tags
+snippet = "Surround by any tags pair" i
+<$1>${VISUAL:}</$1>
+endsnippet

@@ -1,0 +1,971 @@
+# FUNCTIONS-------------------------------------------------
+
+# For ability to choose from set of available property values
+# 'on the fly'.
+# Parameter 't' is a value to test - usually t[1].
+# Parameter 'opts' is a tuple of available options.
+global !p
+def complete (t, opts):
+    if t:
+        opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+    if len(opts)==1:
+        return opts[0]+';'
+    elif len(opts)==0:
+        return ''
+    return "(" + '|'.join(opts) + ');'
+
+# Expands short representations of property values to full word,
+# making almost a 'snippet inside snippet',
+# for reducing snippets file length. Adds a colon if need.
+# Parameter 'm' is a value to test - usually match.group(1).
+# Parameter 'opts' is a key-value pairs (dictionary).
+def expand (m, opts):
+    if not m:
+        return ''
+    ret = opts.get(m)
+    if ret:
+        if ret[-1]!='(':
+            ret+=';'
+        return ret
+    return m+';'
+
+# Converts a letter into the color function
+def colorStart (symbol):
+    if symbol=='r':
+        return 'rgb('
+    elif symbol=='a':
+        return 'rgba('
+    return symbol
+
+endglobal
+
+#===========================================================
+# EXAMPLES:
+
+# Using complete() function:
+#snippet 'pos?i?t?i?o?n?[:]?' "position with options" br
+#position: $1`!p snip.rv=complete(t[1], ['static','relative','absolute','fixed','inherit'])`
+#endsnippet
+
+# Property with colon and value, or with no value
+#snippet 't([:](\S+)?)?' "top" br
+#top: `!p if match.group(2): snip.rv = match.group(2)+';'`
+#endsnippet
+
+# Property with default value
+#snippet 'pos?i?t?i?o?n?[:]?' "position with defaults" br
+#position: ${1:relative};
+#endsnippet
+
+# Property with abbreviated or custom value
+#snippet 'pos?i?t?i?o?n?[:](\S+)' "position with value" br
+#position: `!p snip.rv = expand(match.group(1), {'r':'relative','s':'static','a':'absolute','f':'fixed'})`
+#endsnippet
+
+# Property with abbreviated value, custom value or no value
+#snippet 't([:](\S+)?)?' "top" br
+#top: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+#endsnippet
+
+#===========================================================
+
+# VISUAL FORMATTING-----------------------------------------
+
+snippet 'pos?i?t?i?o?n?[:]?' "position with defaults" br
+position: ${1:relative};
+endsnippet
+snippet 'pos?i?t?i?o?n?[:](\w+)' "position with value" br
+position: `!p snip.rv = expand(match.group(1), {'r':'relative','s':'static','a':'absolute','f':'fixed'})`
+endsnippet
+
+snippet 't([:](\S+)?)?' "top" br
+top: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+snippet 'r([:](\S+)?)?' "right" br
+right: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+snippet 'b([:](\S+)?)?' "bottom" br
+bottom: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+snippet 'l([:](\S+)?)?' "left" br
+left: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+
+snippet 'z([:](\w+)?)?' "z-index" br
+z-index: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+
+snippet 'flo?a?t?[:]?' "float with defaults" br
+float: ${1:left};
+endsnippet
+snippet 'flo?a?t?[:](\w+)' "float with value" br
+float: `!p snip.rv = expand(match.group(1), {'l':'left','r':'right'})`
+endsnippet
+
+snippet 'cle?a?r?[:]?' "clear with defaults" br
+clear: ${1:both};
+endsnippet
+snippet 'cle?a?r?[:](\w+)' "clear with value" br
+clear: `!p snip.rv = expand(match.group(1), {'b':'both','l':'left','r':'right','n':'none'})`
+endsnippet
+
+snippet 'di?s?p?l?a?y?[:]?' "display with defaults" br
+display: ${1:block};
+endsnippet
+snippet 'di?s?p?l?a?y?[:]([\w\-]+)' "display with value" br
+display: `!p snip.rv = expand(match.group(1), {'n':'none','b':'block','f':'flex','if':'inline-flex','i':'inline','ib':'inline-block','li':'list-item','ri':'run-in','cp':'compact','tb':'table','itb':'inline-table','tbcp':'table-caption','tbcl':'table-column','tbclg':'table-column-group','tbhg':'table-header-group','tbfg':'table-footer-group','tbr':'table-row','tbrg':'table-row-group','tbc':'table-cell'})`
+endsnippet
+
+snippet 'vi?s?i?b?i?l?i?t?y?[:]?' "visibility with defaults" br
+visibility: ${1:hidden};
+endsnippet
+snippet 'vi?s?i?b?i?l?i?t?y?[:](\w+)' "visibility with value" br
+visibility: `!p snip.rv = expand(match.group(1), {'h':'hidden','v':'visible','c':'collapse'})`
+endsnippet
+
+snippet 'ove?r?f?l?o?w?[:]?' "overflow with defaults" br
+overflow: ${1:hidden};
+endsnippet
+snippet 'ove?r?f?l?o?w?[:](\w+)' "overflow with value" br
+overflow: `!p snip.rv = expand(match.group(1), {'h':'hidden','v':'visible','s':'scroll','a':'auto'})`
+endsnippet
+
+snippet 'cp(?:[:]r|[:])?' "clip with clues" br
+clip: rect(${1:top},${2:right},${3:bottom},${4:left});
+endsnippet
+snippet 'cp[:]a' "clip: auto" br
+clip: auto;
+endsnippet
+snippet 'cp[:](.{2,})' "clip with value" br
+clip: `!p if match.group(1): snip.rv = match.group(1)`;
+endsnippet
+
+snippet 'rsz([:](\w+)?)?' "resize" br
+resize: `!p snip.rv = expand(match.group(2), {'n':'none'})`
+endsnippet
+
+snippet 'cur?s?o?r?[:]?' "cursor with defaults" br
+cursor: ${1:pointer};
+endsnippet
+snippet 'cur?s?o?r?[:](\w+)' "cursor with value" br
+cursor: `!p snip.rv = expand(match.group(1), {'a':'auto','d':'default','p':'pointer','c':'crosshair','ha':'hand','he':'help','m':'move','t':'text'})`
+endsnippet
+
+# MARGIN AND PADDING----------------------------------------
+
+snippet 'mn?([:](.+)?)?' "margin" br
+margin: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+snippet 'mto?p?([:](\S+)?)?' "margin-top" br
+margin-top: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+snippet 'mbo?t?t?o?m?([:](\S+)?)?' "margin-bottom" br
+margin-bottom: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+snippet 'mle?f?t?([:](\S+)?)?' "margin-left" br
+margin-left: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+snippet 'mri?g?h?t?([:](\S+)?)?' "margin-right" br
+margin-right: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+
+snippet 'pn?([:](.+)?)?' "padding" br
+padding: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'pto?p?([:](\S+)?)?' "padding-top" br
+padding-top: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'pbo?t?t?o?m?([:](\S+)?)?' "padding-bottom" br
+padding-bottom: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'ple?f?t?([:](\S+)?)?' "padding-left" br
+padding-left: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'pri?g?h?t?([:](\S+)?)?' "padding-right" br
+padding-right: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+# BORDER----------------------------------------------------
+
+snippet 'bd[:](.+)' "border" br
+border: `!p snip.rv = expand(match.group(1), {'n':'none'})`
+endsnippet
+snippet 'bd[:]?' "border with defaults" br
+border: ${1:1px} ${2:solid} ${3:#000};
+endsnippet
+
+snippet 'bdcla?p?s?e?[:]?' "border-collapse with defaults" br
+border-collapse: ${1:collapse};
+endsnippet
+snippet 'bdcla?p?s?e?[:](\w+)' "border-collapse with value" br
+border-collapse: `!p snip.rv = expand(match.group(1), {'c':'collapse','s':'separate'})`
+endsnippet
+
+snippet 'bdco?l?o?r?[:]?' "border-color with defaults" br
+border-color: ${1:#000};
+endsnippet
+snippet 'bdco?l?o?r?[:](\S+)' "border-color with value" br
+border-color: `!p snip.rv = expand(match.group(1), {'t':'transparent'})`
+endsnippet
+
+snippet 'bdim?a?g?e?[:]?' "border-image" br
+border-image: url($1);
+endsnippet
+snippet 'bdim?a?g?e?[:]([\S]{2,})' "border-image with value" br
+border-image: url(`!p snip.rv = match.group(1)`);
+endsnippet
+snippet 'bdim?a?g?e?[:]n' "border-image: none" br
+border-image: none;
+endsnippet
+
+snippet 'bdspa?c?i?n?g?([:](\S+)?)?' "border-spacing" br
+border-spacing: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'bdst?y?l?e?([:]([\w\-]+)?)?' "border-style" br
+border-style: `!p snip.rv = expand(match.group(2), {'n':'none','h':'hidden','dt':'dotted','ds':'dashed','s':'solid','db':'double','dtds':'dot-dash','w':'wave','g':'groove','r':'ridge','i':'inset','o':'outset'})`
+endsnippet
+
+snippet 'bdwi?d?t?h?([:](\S+)?)?' "border-width" br
+border-width: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+
+# Border-top family
+
+snippet 'bd?t[:](.+)' "border-top" br
+border-top: `!p snip.rv = expand(match.group(1), {'n':'none'})`
+endsnippet
+snippet 'bd?t[:]?' "border-top with defaults" br
+border-top: ${1:1px} ${2:solid} ${3:#000};
+endsnippet
+
+snippet 'bd?twi?d?t?h?([:](\S+)?)?' "border-top-width" br
+border-top-width: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'bd?tst?y?l?e?([:](\S+)?)?' "border-top-style" br
+border-top-style: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'bd?tco?l?o?r?[:]?' "border-top-color with defaults" br
+border-top-color: ${1:#000};
+endsnippet
+snippet 'bd?tco?l?o?r?[:](\S+)' "border-top-color with value" br
+border-top-color: `!p snip.rv = expand(match.group(1), {'t':'transparent'})`
+endsnippet
+
+# Border-right family
+
+snippet 'bd?r[:](.+)' "border-right" br
+border-right: `!p snip.rv = expand(match.group(1), {'n':'none'})`
+endsnippet
+snippet 'bd?r[:]?' "border-right with defaults" br
+border-right: ${1:1px} ${2:solid} ${3:#000};
+endsnippet
+
+snippet 'bd?rwi?d?t?h?([:](\S+)?)?' "border-right-width" br
+border-right-width: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'bd?rst?y?l?e?([:](\S+)?)?' "border-right-style" br
+border-right-style: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'bd?rco?l?o?r?[:]?' "border-right-color with defaults" br
+border-right-color: ${1:#000};
+endsnippet
+snippet 'bd?rco?l?o?r?[:](\S+)' "border-right-color with value" br
+border-right-color: `!p snip.rv = expand(match.group(1), {'t':'transparent'})`
+endsnippet
+
+# Border-bottom family
+
+snippet 'bd?b[:](.+)' "border-bottom" br
+border-bottom: `!p snip.rv = expand(match.group(1), {'n':'none'})`
+endsnippet
+snippet 'bd?b[:]?' "border-bottom with defaults" br
+border-bottom: ${1:1px} ${2:solid} ${3:#000};
+endsnippet
+
+snippet 'bd?bwi?d?t?h?([:](\S+)?)?' "border-bottom-width" br
+border-bottom-width: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'bd?bst?y?l?e?([:](\S+)?)?' "border-bottom-style" br
+border-bottom-style: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'bd?bco?l?o?r?[:]?' "border-bottom-color with defaults" br
+border-bottom-color: ${1:#000};
+endsnippet
+snippet 'bd?bco?l?o?r?[:](\S+)' "border-bottom-color with value" br
+border-bottom-color: `!p snip.rv = expand(match.group(1), {'t':'transparent'})`
+endsnippet
+
+# Border-left family
+
+snippet 'bd?l[:](.+)' "border-left" br
+border-left: `!p snip.rv = expand(match.group(1), {'n':'none'})`
+endsnippet
+snippet 'bd?l[:]?' "border-left with defaults" br
+border-left: ${1:1px} ${2:solid} ${3:#000};
+endsnippet
+
+snippet 'bd?lwi?d?t?h?([:](\S+)?)?' "border-left-width" br
+border-left-width: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'bd?lst?y?l?e?([:](\S+)?)?' "border-left-style" br
+border-left-style: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'bd?lco?l?o?r?[:]?' "border-left-color with defaults" br
+border-left-color: ${1:#000};
+endsnippet
+snippet 'bd?lco?l?o?r?[:](\S+)' "border-left-color with value" br
+border-left-color: `!p snip.rv = expand(match.group(1), {'t':'transparent'})`
+endsnippet
+
+# OUTLINE---------------------------------------------------
+
+snippet 'oli?n?e?([:](.+)?)?' "outline" br
+outline: `!p snip.rv = expand(match.group(2), {'n':'none'})`
+endsnippet
+
+snippet 'olof?f?s?e?t?([:](\S+)?)?' "outline-offset" br
+outline-offset: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'olwi?d?t?h?([:](\S+)?)?' "outline-width" br
+outline-width: `!p snip.rv = expand(match.group(2), {'t':'thin','m':'medium','tc':'thick'})`
+endsnippet
+
+snippet 'olst?y?l?e?([:](\w+)?)?' "outline-style" br
+outline-style: `!p snip.rv = expand(match.group(2), {'n':'none','dt':'dotted','ds':'dashed','s':'solid','db':'double','g':'groove','r':'ridge','i':'inset','o':'outset'})`
+endsnippet
+
+snippet 'olco?l?o?r?[:]?' "outline-color with defaults" br
+outline-color: ${1:#000};
+endsnippet
+snippet 'olco?l?o?r?[:](\S+)' "outline-color with value" br
+outline-color: `!p snip.rv = expand(match.group(1), {'i':'invert'})`
+endsnippet
+
+# BOX SIZING------------------------------------------------
+
+snippet 'bxz[:]?' "box-sizing with defaults" br
+box-sizing: ${1:border-box};
+endsnippet
+snippet 'bxz[:](\S+)' "box-sizing with value" br
+box-sizing: `!p snip.rv = expand(match.group(1), {'bb':'border-box','cb':'content-box','a':'absolute','f':'fixed'})`
+endsnippet
+
+snippet 'bxsha?d?o?w?[:]?' "box-shadow with defaults" br
+box-shadow: ${1:inset} ${2:hoff} ${3:voff} ${4:blur} ${5:spread} ${6:#000};
+endsnippet
+snippet 'bxsha?d?o?w?[:](.+)' "box-shadow" br
+box-shadow: `!p snip.rv = expand(match.group(1), {'n':'none'})`
+endsnippet
+
+snippet 'w([:](\S+)?)?' "width" br
+width: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+snippet 'h([:](\S+)?)?' "height" br
+height: `!p snip.rv = expand(match.group(2), {'a':'auto'})`
+endsnippet
+
+snippet 'mawi?d?t?h?([:](\S+)?)?' "max-width" br
+max-width: `!p snip.rv = expand(match.group(2), {'n':'none'})`
+endsnippet
+snippet 'mahe?i?g?h?t?([:](\S+)?)?' "max-height" br
+max-height: `!p snip.rv = expand(match.group(2), {'n':'none'})`
+endsnippet
+snippet 'miwi?d?t?h?([:](\S+)?)?' "min-width" br
+min-width: `!p snip.rv = expand(match.group(2), {'n':'none'})`
+endsnippet
+snippet 'mihe?i?g?h?t?([:](\S+)?)?' "min-height" br
+min-height: `!p snip.rv = expand(match.group(2), {'n':'none'})`
+endsnippet
+
+# FONT------------------------------------------------------
+
+snippet 'fo?n?t?([:](.+)?)?' "font" br
+font: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'f[+][:]?' "font with defaults" br
+font: ${1:1em} ${2:"Liberation Sans"},${3:Arial},${4:Helvetica},${5:sans-serif};
+endsnippet
+
+snippet 'fwe?i?g?h?t?([:](\w+)?)?' "font-weight" br
+font-weight: `!p snip.rv = expand(match.group(2), {'n':'normal','b':'bold','br':'bolder','lr':'lighter'})`
+endsnippet
+
+snippet 'fst?y?l?e?[:]?' "font-style with defaults" br
+font-style: ${1:italic};
+endsnippet
+snippet 'fst?y?l?e?[:](\w+)' "font-style with value" br
+font-style: `!p snip.rv = expand(match.group(1), {'i':'italic','n':'normal','o':'oblique'})`
+endsnippet
+
+snippet 'fva?r?i?a?n?t?([:](\w+)?)?' "font-variant" br
+font-variant: `!p snip.rv = expand(match.group(2), {'n':'normal','sc':'small-caps'})`
+endsnippet
+
+snippet 'fze?([:](\S+)?)?' "font-size" br
+font-size: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'ffa?m?i?l?y?([:](.{3,})?)?' "font-family with value" br
+font-family: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'ffa?m?i?l?y?[:]s' "font-family: serif" br
+font-family: "${1:Liberation Serif}","Times New Roman",Times,serif;
+endsnippet
+snippet 'ffa?m?i?l?y?[:]ss' "font-family: sans-serif" br
+font-family: "${1:Liberation Sans}",Arial,Helvetica,sans-serif;
+endsnippet
+snippet 'ffa?m?i?l?y?[:]m' "font-family: monospace" br
+font-family: "${1:Courier New}", Courier, monospace;
+endsnippet
+
+# TEXT------------------------------------------------------
+
+
+snippet 'val?i?g?n?[:]?' "vertical-align with defaults" br
+vertical-align: ${1:top};
+endsnippet
+snippet 'val?i?g?n?[:](\S+)' "vertical-align with value" br
+vertical-align: `!p snip.rv = expand(match.group(1), {'t':'top','tt':'text-top','m':'middle','bl':'baseline','b':'baseline','tb':'text-bottom','sup':'super'})`
+endsnippet
+
+snippet 'tal?i?g?n?[:]?' "text-align with defaults" br
+text-align: ${1:left};
+endsnippet
+snippet 'tal?i?g?n?[:](\w+)' "text-align with value" br
+text-align: `!p snip.rv = expand(match.group(1), {'l':'left','c':'center','r':'right','j':'justify'})`
+endsnippet
+
+snippet 'tde?c?o?r?a?t?i?o?n?[:]?' "text-decoration with defaults" br
+text-decoration: ${1:none};
+endsnippet
+snippet 'tde?c?o?r?a?t?i?o?n?[:](\S+)' "text-decoration with value" br
+text-decoration: `!p snip.rv = expand(match.group(1), {'n':'none','u':'underline','o':'overline','l':'line-through'})`
+endsnippet
+
+snippet 'tin?d?e?n?t?([:](\S+)?)?' "text-indent" br
+text-indent: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'ttr?a?n?s?f?o?r?m?[:]?' "text-transform with defaults" br
+text-transform: ${1:uppercase};
+endsnippet
+snippet 'ttr?a?n?s?f?o?r?m?[:](\w+)' "text-transform with value" br
+text-transform: `!p snip.rv = expand(match.group(1), {'n':'none','u':'uppercase','c':'capitalize','l':'lowercase'})`
+endsnippet
+
+snippet 'tsha?d?o?w?[:]?' "text-shadow with defaults" br
+text-shadow: ${1:hoff},${2:voff},${3:blur},${4:#000};
+endsnippet
+snippet 'tsha?d?o?w?[:](.+)' "text-shadow with value" br
+text-shadow: `!p snip.rv = expand(match.group(1), {'n':'none'})`
+endsnippet
+
+snippet 'lhe?i?g?h?t?([:](\S+)?)?' "line-height" br
+line-height: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'ltsp?a?c?i?n?g?([:](\S+)?)?' "letter-spacing" br
+letter-spacing: `!p snip.rv = expand(match.group(2), {'n':'normal'})`
+endsnippet
+
+snippet 'whsp?a?c?e?[:]?' "white-space with defaults" br
+white-space: ${1:pre};
+endsnippet
+snippet 'whsp?a?c?e?[:](\w+)' "white-space with value" br
+white-space: `!p snip.rv = expand(match.group(1), {'p':'pre','n':'normal'})`
+endsnippet
+
+snippet 'wobr?e?a?k?([:](\S+)?)?' "word-break" br
+word-break: `!p snip.rv = expand(match.group(2), {'n':'normal'})`
+endsnippet
+
+snippet 'wosp?a?c?i?n?g?([:](\S+)?)?' "word-spacing" br
+word-spacing: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'tove?r?f?l?o?w?[:]?' "text-overflow with defaults" br
+text-overflow: ${1:elipsis};
+endsnippet
+snippet 'tove?r?f?l?o?w?[:](\w+)' "text-overflow with value" br
+text-overflow: `!p snip.rv = expand(match.group(1), {'e':'elipsis','c':'clip'})`
+endsnippet
+
+# COLOR-----------------------------------------------------
+
+snippet 'c[:]?' "color with defaults" br
+color: ${1:#000};
+endsnippet
+snippet 'c[:](.+)' "color" br
+color: `!p if match.group(1): snip.rv = match.group(1)+';'`
+endsnippet
+
+snippet 'opa?c?i?t?y?([:](\S+)?)?' "opacity" br
+opacity: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+# BACKGROUND------------------------------------------------
+
+snippet 'bgn?d?[:]?' "background with defaults" br
+background: ${1:#000};
+endsnippet
+snippet 'bgn?d?[:]([\S]+)' "background with value" br
+background: `!p snip.rv = expand(match.group(1), {'n':'none'})`
+endsnippet
+snippet 'bg[+][:]?' "background with full set" br
+background: ${1:#fff} url($2) ${3:0} ${4:0} ${5:no-repeat};
+endsnippet
+
+snippet 'bgco?l?o?r?[:]?' "background-color with defaults" br
+background-color: ${1:#fff};
+endsnippet
+snippet 'bgco?l?o?r?[:](.+)' "background-color with value" br
+background-color: `!p snip.rv = expand(match.group(1), {'t':'transparent'})`
+endsnippet
+
+snippet 'bgim?a?g?e?[:]?' "background-image" br
+background-image: url($1);
+endsnippet
+snippet 'bgim?a?g?e?[:]([\S]{2,})' "background-image with value" br
+background-image: url(`!p snip.rv = match.group(1)`);
+endsnippet
+snippet 'bgim?a?g?e?[:]n' "background-image: none" br
+background-image: none;
+endsnippet
+
+snippet 'bgre?p?e?a?t?([:](\S+)?)?' "background-repeat" br
+background-repeat: `!p snip.rv = expand(match.group(2), {'n':'no-repeat','x':'repeat-x','y':'repeat-y','sp':'space','rd':'round'})`
+endsnippet
+
+snippet 'bgat?t?a?c?h?m?e?n?t?([:]([\w]+)?)?' "background-attachment" br
+background-attachment: `!p snip.rv = expand(match.group(2), {'f':'fixed','s':'scroll'})`
+endsnippet
+
+snippet 'bgpo?s?i?t?i?o?n?[:]?' "background-position with defaults" br
+background-position: ${1:0} ${2:0};
+endsnippet
+snippet 'bgpo?s?i?t?i?o?n?[:](.+)' "background-position with value" br
+background-position: `!p if match.group(1): snip.rv = match.group(1)+';'`
+endsnippet
+
+snippet 'bgpx([:](\S+)?)?' "background-position-x" br
+background-position-x: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet 'bgpy([:](\S+)?)?' "background-position-y" br
+background-position-y: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'bgcp[:]?' "background-clip with defaults" br
+background-clip: ${1:padding-box};
+endsnippet
+snippet 'bgcp[:](\S+)' "background-clip with value" br
+background-clip: `!p snip.rv = expand(match.group(1), {'pb':'padding-box','cb':'content-box'})`
+endsnippet
+
+snippet 'bgor?i?g?i?n?([:](\S+)?)?' "background-origin" br
+background-origin: `!p snip.rv = expand(match.group(2), {'pb':'padding-box','bb':'border-box','cb':'content-box'})`
+endsnippet
+
+snippet 'bgsz([:](\w+)?)?' "background-size" br
+background-size: `!p snip.rv = expand(match.group(2), {'a':'auto','ct':'contain','cv':'cover'})`
+endsnippet
+
+# CONTENT---------------------------------------------------
+
+snippet 'cn?t[:]?' "content" br
+content: '$1';
+endsnippet
+snippet 'cn?t[:](.+)' "content with value" br
+content: `!p snip.rv = expand(match.group(1), {'n':'normal','oq':'open-quote','noq':'no-open-quote','cq':'close-quote','c':'counter','a':'attr('})`
+endsnippet
+
+snippet 'qu?o?t?e?s?([:](.+)?)?' "quotes" br
+quotes: `!p snip.rv = expand(match.group(2), {'n':'none','ru':"'\\00AB' '\\00BB' '\\201E' '\\201C'",'en':"'\\201C' '\\201D' '\\2018' '\\2019'"})`
+endsnippet
+
+snippet 'core?s?e?t?([:](\w+)?)?' "counter-reset" br
+counter-reset: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'coin?c?r?e?m?e?n?t?([:](\w+)?)?' "counter-increment" br
+counter-increment: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+# TABLE-----------------------------------------------------
+
+snippet 'tbla?y?o?u?t?([:](\w+)?)?' "table-layout" br
+table-layout: `!p snip.rv = expand(match.group(2), {'a':'auto','f':'fixed'})`
+endsnippet
+
+snippet 'cpsi?d?e?([:](\w+)?)?' "caption-side" br
+caption-side: `!p snip.rv = expand(match.group(2), {'t':'top','b':'bottom'})`
+endsnippet
+
+snippet 'ece?l?l?s?([:](\w+)?)?' "empty-cells" br
+empty-cells: `!p snip.rv = expand(match.group(2), {'s':'show','h':'hide'})`
+endsnippet
+
+# LIST------------------------------------------------------
+
+snippet 'lis([:](.+)?)?' "list-style" br
+list-style: `!p snip.rv = expand(match.group(2), {'n':'none'})`
+endsnippet
+
+snippet 'lisp([:](\w+)?)?' "list-style-position" br
+list-style-position: `!p snip.rv = expand(match.group(2), {'i':'inside','o':'outside'})`
+endsnippet
+
+snippet 'list([:](\S+)?)?' "list-style-type" br
+list-style-type: `!p snip.rv = expand(match.group(2), {'n':'none','d':'disc','c':'circle','s':'square','dc':'decimal','dclz':'decimal-leading-zero','lr':'lower-roman','ur':'upper-roman'})`
+endsnippet
+
+snippet 'lisim?a?g?e?[:]?' "list-style-image" br
+list-style-image: url($1);
+endsnippet
+snippet 'lisim?a?g?e?[:]([\S]{2,})' "list-style-image with value" br
+list-style-image: url(`!p snip.rv = match.group(1)`);
+endsnippet
+snippet 'lisim?a?g?e?[:]n' "list-style-image: none" br
+list-style-image: none;
+endsnippet
+
+# ALIGNMENT (FOR FLEXBOX, GRID, ETC.)-----------------------
+
+snippet 'aco?n?t?e?n?t?([:](\S+)?)?' "align-content" br
+align-content: `!p snip.rv = expand(match.group(2), {'c':'center','fe':'flex-end','fs':'flex-start','s':'stretch','sa':'space-around','sb':'space-between'})`
+endsnippet
+
+snippet 'ait?e?m?s?([:](\S+)?)?' "align-items" br
+align-items: `!p snip.rv = expand(match.group(2), {'b':'baseline','c':'center','fe':'flex-end','fs':'flex-start','s':'stretch'})`
+endsnippet
+
+snippet 'ase?l?f?([:](\S+)?)?' "align-self" br
+align-self: `!p snip.rv = expand(match.group(2), {'a':'auto','b':'baseline','c':'center','fe':'flex-end','fs':'flex-start','s':'stretch'})`
+endsnippet
+
+snippet 'jco?n?t?e?n?t([:](\S+)?)?' "justify-content" br
+justify-content: `!p snip.rv = expand(match.group(2), {'c':'center','fe':'flex-end','fs':'flex-start','sa':'space-around','sb':'space-between'})`
+endsnippet
+
+# TRANSFORM-------------------------------------------------
+
+snippet 'trf([:](.{4,})?)?' "transform" br
+transform: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet trf:n "transform: none" b
+transform: none;
+endsnippet
+
+snippet 'trf[:]r([xyz])?' "transform: rotate" br
+transform: rotate`!p
+if match.group(1): snip.rv=match.group(1).capitalize()
+`(${1:angle});
+endsnippet
+
+snippet trf[:]sc "transform: scale" b
+transform: scale(${1:x},${2:y});
+endsnippet
+snippet 'trf[:]sc([xyz])' "transform: scale XYZ" br
+transform: scale`!p
+if match.group(1): snip.rv=match.group(1).capitalize()
+`($1);
+endsnippet
+snippet trf:sc3 "transform: scale3d" b
+transform: scale3d(${1:x},${2:y},${3:z});
+endsnippet
+
+snippet 'trf[:]sk([xy])' "transform: skew XY" br
+transform: skew`!p
+if match.group(1): snip.rv=match.group(1).capitalize()
+`($1);
+endsnippet
+
+snippet trf[:]t "transform: translate" b
+transform: translate(${1:x},${2:y});
+endsnippet
+snippet 'trf[:]t([xyz])' "transform: translate XYZ" br
+transform: translate`!p
+if match.group(1): snip.rv=match.group(1).capitalize()
+`($1);
+endsnippet
+snippet trf:t3 "transform: translate3d" b
+transform: translate3d(${1:x},${2:y},${3:z});
+endsnippet
+
+snippet 'trfo[:]?' "transform-origin with value" br
+transform-origin: ${1:x} ${2:y} ${3:z};
+endsnippet
+snippet 'trfo[:](.+)' "transform-origin with value" br
+transform-origin: `!p if match.group(1): snip.rv = match.group(1)+';'`
+endsnippet
+
+snippet 'trfs[:]?' "transform-style with value" br
+transform-style: ${1:preserve-3d};
+endsnippet
+snippet 'trfs[:](.+)' "transform-style with value" br
+transform-style: `!p if match.group(1): snip.rv = match.group(1)+';'`
+endsnippet
+
+snippet 'trs[:]?' "transition with value" br
+transition: ${1:prop} ${2:time};
+endsnippet
+snippet 'trs[:](.+)' "transition with value" br
+transition: `!p if match.group(1): snip.rv = match.group(1)+';'`
+endsnippet
+
+snippet 'trsde([:](.+)?)?' "transition-delay" br
+transition-delay: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'trsdu([:](.+)?)?' "transition-duration" br
+transition-duration: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'trsp([:](.+)?)?' "transition-property" br
+transition-property: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'trstf([:](.+)?)?' "transition-timing-function" br
+transition-timing-function: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+# ANIMATION-------------------------------------------------
+
+snippet 'anim([:](\S+)?)?' "animation" br
+animation: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+snippet anim+ "animation with clues" b
+animation: ${1:name} ${2:duration} ${3:timing-function} ${4:delay} ${5:iteration-count} ${6:direction} ${7:fill-mode};
+endsnippet
+
+snippet 'animdel([:](\S+)?)?' "animation-delay" br
+animation-delay: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'animdir[:]?' "animation-direction with defaults" br
+animation-direction: ${1:normal};
+endsnippet
+snippet 'animdir[:](\S+)' "animation-direction with value" br
+animation-direction: `!p snip.rv = expand(match.group(1), {'n':'normal','a':'alternate','ar':'alternate-reverse','r':'reverse'})`
+endsnippet
+
+snippet 'animdur[:]?' "animation-duration with defaults" br
+animation-duration: ${1:1s};
+endsnippet
+snippet 'animdur[:](\S+)' "animation-duration with value" br
+animation-duration:
+endsnippet
+
+snippet 'animfm[:]?' "animation-fill-mode with defaults" br
+animation-fill-mode: ${1:both};
+endsnippet
+snippet 'animfm[:](\S+)' "animation-fill-mode with value" br
+animation-fill-mode: `!p snip.rv = expand(match.group(1), {'bt':'both','bh':'both','b':'backwards'})`
+endsnippet
+
+snippet 'animic[:]?' "animation-iteration-count with defaults" br
+animation-iteration-count: ${1:1};
+endsnippet
+snippet 'animic[:](\S+)' "animation-iteration-count with value" br
+animation-iteration-count: `!p snip.rv = expand(match.group(1), {'i':'infinite'})`
+endsnippet
+
+snippet 'animn[:]?' "animation-name with defaults" br
+animation-name: ${1:none};
+endsnippet
+snippet 'animn[:](\S+)' "animation-name with value" br
+animation-name:
+endsnippet
+
+snippet 'animps[:]?' "animation-play-state with defaults" br
+animation-play-state: ${1:running};
+endsnippet
+snippet 'animps[:](\w+)' "animation-play-state with value" br
+animation-play-state: `!p snip.rv = expand(match.group(1), {'r':'running','p':'paused'})`
+endsnippet
+
+snippet 'animtf[:]?' "animation-timing-function with defaults" br
+animation-timing-function: ${1:linear};
+endsnippet
+snippet 'animtf[:]((?:(?!cb).)+)' "animation-timing-function with value" br
+animation-timing-function: `!p snip.rv = expand(match.group(1), {'l':'linear','e':'ease','ei':'ease-in','eo':'ease-out','eio':'ease-in-out'})`
+endsnippet
+snippet animtf:cb "animation-timing-function: cubic-bezier()" b
+animation-timing-function: cubic-bezier(${1:0.1},${2:0.7},${3:1.0},${4:0.1});
+endsnippet
+
+# FLEXBOX---------------------------------------------------
+
+snippet 'fx([:](.+)?)?' "flex" br
+flex: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'fxba?s?i?s?([:](\S+)?)?' "flex-basis" br
+flex-basis: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'fxdi?r?[:]?' "flex-direction with defaults" br
+flex-direction: ${1:column};
+endsnippet
+snippet 'fxdi?r?[:](\S+)' "flex-direction with value" br
+flex-direction: `!p snip.rv = expand(match.group(1), {'c':'column','cr':'column-reverse','r':'row','rr':'row-reverse'})`
+endsnippet
+
+snippet 'fxfl?o?w?([:](\S+)?)?' "flex-flow" br
+flex-flow: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'fxgr?o?w?([:](\S+)?)?' "flex-grow" br
+flex-grow: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'fxshr?i?n?k?([:](\S+)?)?' "flex-shrink" br
+flex-shrink: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'fxwr?a?p?([:](\S+)?)?' "flex-wrap" br
+flex-wrap: `!p snip.rv = expand(match.group(2), {'n':'none','w':'wrap','wr':'wrap-reverse'})`
+endsnippet
+
+# GRID------------------------------------------------------
+
+snippet 'gar?e?a?([:](.+)?)?' "grid-area" br
+grid-area: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'gga?p?([:](\S+)?)?' "grid-gap" br
+grid-gap: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'gco?l?u?m?n?([:](.+)?)?' "grid-column" br
+grid-column: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'gro?w?([:](.+)?)?' "grid-row" br
+grid-row: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'gtar?e?a?s?([:](.+)?)?' "grid-template-areas" br
+grid-template-areas: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'gtco?l?u?m?n?s?([:](.+)?)?' "grid-template-columns" br
+grid-template-columns: `!p snip.rv = expand(match.group(2), {'a':'auto','n':'none','ma':'max-content','mi':'min-content'})`
+endsnippet
+
+snippet 'gtro?w?s?([:](.+)?)?' "grid-template-rows" br
+grid-template-rows: `!p snip.rv = expand(match.group(2), {'a':'auto','n':'none','ma':'max-content','mi':'min-content'})`
+endsnippet
+
+snippet 'gafl?o?w?([:](.+)?)?' "grid-auto-flow" br
+grid-auto-flow: `!p snip.rv = expand(match.group(2), {'a':'auto','fc':'fit-content(','ma':'max-content','mi':'min-content'})`
+endsnippet
+
+snippet 'gaco?l?u?m?n?s?([:](.+)?)?' "grid-auto-columns" br
+grid-auto-columns: `!p snip.rv = expand(match.group(2), {'a':'auto','fc':'fit-content(','ma':'max-content','mi':'min-content'})`
+endsnippet
+
+snippet 'garo?w?s?([:](.+)?)?' "grid-auto-rows" br
+grid-auto-rows: `!p snip.rv = expand(match.group(2), {'a':'auto','fc':'fit-content(','ma':'max-content','mi':'min-content'})`
+endsnippet
+
+snippet 'gcst?a?r?t?([:](.+)?)?' "grid-column-start" br
+grid-column-start: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'gcen?d?([:](.+)?)?' "grid-column-end" br
+grid-column-end: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'grst?a?r?t?([:](.+)?)?' "grid-row-start" br
+grid-row-start: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+snippet 'gren?d?([:](.+)?)?' "grid-row-end" br
+grid-row-end: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
+# PRINT-----------------------------------------------------
+
+snippet 'pgbb([:](\w+)?)?' "page-break-before" br
+page-break-before: `!p snip.rv = expand(match.group(2), {'a':'auto','al':'always','l':'left','r':'right'})`
+endsnippet
+
+snippet 'pgbi([:](\w+)?)?' "page-break-inside" br
+page-break-inside: `!p snip.rv = expand(match.group(2), {'a':'auto','av':'avoid'})`
+endsnippet
+
+snippet 'pgba([:](\w+)?)?' "page-break-after" br
+page-break-after: `!p snip.rv = expand(match.group(2), {'a':'auto','al':'always','l':'left','r':'right'})`
+endsnippet
+
+# @-RULES (AT-RULES)----------------------------------------
+
+snippet @f "@font-face for modern browsers" b
+@font-face {
+	font-family: '${1:FontName}';
+	src: url('${2:FileName}.woff2') format('woff2'),
+	url('$2.woff') format('woff'),
+	font-style: ${3:normal};
+	font-weight: ${4:normal};
+}
+endsnippet
+
+snippet @f+ "@font-face highly compatible" b
+@font-face {
+	font-family: '${1:FontName}';
+	src: url('${2:FileName}.eot');
+	src: url('$2.eot?#iefix') format('embedded-opentype'),
+		url('$2.woff2') format('woff2'),
+		url('$2.woff') format('woff'),
+		url('$2.ttf') format('truetype'),
+		url('$2.svg#FontName') format('svg');
+	font-style: ${3:normal};
+	font-weight: ${4:normal};
+}
+endsnippet
+
+snippet @im?p?o?r?t? "@import" b
+@import url($1);
+endsnippet
+
+snippet @kf "@keyframes" b
+@keyframes ${1:identifier} {
+	from {$2}
+	to {$3}
+}
+endsnippet
+
+snippet @m "@media" b
+@media screen and (${1:max-width}: ${2:480px}) {
+	$3
+}
+endsnippet
+
+snippet @s "@supports" b
+@supports ${1:condition} {
+	$2
+}
+endsnippet
+
+# MISC------------------------------------------------------
+
+snippet { "create block" w
+{
+	$1
+}
+endsnippet
+
+snippet r "rgb color" w
+rgb($1
+endsnippet
+snippet a "rgba color" w
+rgba($1,.${2:5})
+endsnippet
+

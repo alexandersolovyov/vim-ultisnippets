@@ -1,0 +1,706 @@
+*emmet-ultisnips-css.rux*		Emmet for UltiSnips *emmet-css*
+
+		Сниппеты в стиле Emmet для плагина UltiSnips
+				для файлов CSS
+
+Author: Alexander Solovyov <alexander-solovyov@yandex.ru>
+Repository: {https://github.com/alexandersolovyov/emmet-ultisnips}
+Snippets file: {<path-to-snippets>/emmet-css.snippets}
+License: GNU GPLv2
+
+================================================================================
+Cодержание
+
+Общие сведения						|emmet-ultisnips-css-notes|
+О справочнике сокращений				|emmet-ultisnips-css-about|
+Установка						|emmet-ultisnips-css-install|
+Добавление сниппетов					|emmet-ultisnips-css-addsnippet|
+
+1. Визуальное форматирование				|emmet-ultisnips-css-formatting|
+2. Отступы и поля					|emmet-ultisnips-css-margin_padding|
+3. Границы (border)					|emmet-ultisnips-css-border|
+4. Обводка (outline)					|emmet-ultisnips-css-outline|
+5. Box-sizing						|emmet-ultisnips-css-box-sizing|
+6. Шрифт						|emmet-ultisnips-css-font|
+7. Текст						|emmet-ultisnips-css-text|
+8. Цвет							|emmet-ultisnips-css-color|
+9. Задний фон						|emmet-ultisnips-css-background|
+10. Содержимое						|emmet-ultisnips-css-content|
+11. Таблицы						|emmet-ultisnips-css-table|
+12. Списки						|emmet-ultisnips-css-list|
+13. Выравнивание (для FlexBox и Grid)			|emmet-ultisnips-css-align|
+14. Трансформации					|emmet-ultisnips-css-transform|
+15. Анимация						|emmet-ultisnips-css-animation|
+16. Flex-Box						|emmet-ultisnips-css-flexbox|
+17. Grid						|emmet-ultisnips-css-grid|
+18. Печать						|emmet-ultisnips-css-print|
+19. At-правила (@...)					|emmet-ultisnips-css-at_rules|
+20. Дополнительные сокращения				|emmet-ultisnips-css-misc|
+
+================================================================================
+ОБЩИЕ СВЕДЕНИЯ					*emmet-ultisnips-css-notes*
+
+В этом документе приведен справочник сокращений, используемых сниппетами
+в стиле плагина Emmet для файлов CSS, реализованными для плагина Ultisnips.
+
+Для использования сниппета - как обычно, просто введите сокращение в стиле
+Emmet и нажмите клавишу-триггер (по-умолчанию <Tab>).
+
+У этих сниппетов есть отличия от стандартных сниппетов Emmet:
+- Если свойство CSS развёрнуто со значениями по-умолчанию, то чаще всего каждое
+  из них можно изменить, и между ними можно
+  перемащаться с помощью триггеров движения UltiSnips (если в настройках не
+  указано иное - это сочетания клавиш <c-j> и <c-k>).
+- Если введено неизвестное или неправильное сокращение, оно просто не развернётся
+  и введенные символы останутся, а не будут удалены.
+- Ввод значения без двоеточия НЕ поддерживается (например, {mt:1em} поддерживается,
+  а {mt1em} - нет).
+- Если указать любое сокращение для имени свойства, а за ним через двоеточие
+  написать полное или неизвестное для списка сниппетов значение свойства,
+  то сокращение развернётся, а значение останется неизменным.
+  То есть проверки значений свойств на правильность нет.
+  Например, {fw:400} превратится в {font-weight: 400;}, {c:white} - в
+  {color: white;}, и даже {c:1em} превратится в {color: 1em;}. Так сделано для
+  того, чтобы не ограничивать действия пользователя и упростить создание сниппетов.
+- Где нужно - можно вводить после сокращённого имени свойства несколько свойств (через
+  пробел или запятую, или и то и другое). Например, {m:1em 2em} развернётся в {margin: 1em 2em;}.
+- Реализованы сниппеты не для всех возможных свойств, их список может отличаться от
+  оригинального набора Emmet - 
+  в первую очередь автор добавляет те сниппеты, которые действительно нужны, и
+  список сниппетов будет пополняться по мере необходимости; 
+- Некоторые сниппеты изменены - в основном это касается значений свойств.
+- Если введено сокращение свойства без значения, и значение по-умолчанию не задано,
+  то точка с запятой в конце строки автоматически не ставится.
+- В некоторых случаях, если написано сокращение свойства и его значения, а значение -
+  в виде функции, то скобка и точка с запятой в конце строки не ставятся автоматически.
+  Например, {cn:a} развернётся в {content: attr(}, и нужно будет дописать аргументы для
+  {attr()}, скобку и точку с запятой.
+
+================================================================================
+О справочнике сокращений				|emmet-ultisnips-css-about|
+
+У большинства сокращений есть вариант, заканчивающийся двоеточием.
+Например: {ff} значит то-же самое, что и {ff:}.
+Также часто можно использовать более длинные сочетания, например {ffam} или {ffamily}.
+Всё это будет обозначать одно и то-же (в данном примере - {font-family:}).
+Поэтому все возможные варианты написания не указываются в этом файле справки.
+
+Если несколько сокращений совпадают с одним и тем-же выводом, то они могут быть
+указаны через запятую.
+
+Когда для одного и того-же имени свойства может быть несколько сокнащённых вариантов,
+для описания сокращённых значений используется только один из этих вариантов.
+Например, {bt} и {bdt} превращаются в одно и то-же имя свойства: {border-top:}.
+В этом справочнике указано, что {bdt:n} будет развёрнуто в {border-top: none}, но {bt:n}
+будет развёрнуто в ту же самую строку (хотя в справочнике это не указано).
+
+================================================================================
+УСТАНОВКА						*emmet-ultisnips-css-install*
+
+Для правильной работы сниппетов, файл со сниппетами {emmet-css.snippets}
+должен находиться в одной из папок со сниппетами UltiSnips.
+Такую папку можно создать в любом месте. По умолчанию это должна быть папка
+{~/.vim/UltiSnips}.
+
+Можно создать свою папку для сниппетов. Чтобы плагин использовал их,
+папки со сниппетами нужно указать в файле {~/.vimrc} с помощью переменной.
+Например, если использовать папку {~/.vim/ultisnippets}, добавьте переменную:
+>
+    let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/ultisnippets']
+<
+Так можно указать несколько папок сразу, через запятую.
+
+Далее, файл со сниппетами Emmet должен быть подключен к сниппетам css.
+Для этого первой строкой в файле {css.snippets} (в папке сниппетов) должна быть
+>
+    extends emmet-css.snippets
+<
+Таким же образом можно подключить эти сниппеты к другим типам файлов - например
+к '.js' - если это нужно.
+
+Для возможности просмотра текущего файла помощи с помощью команды :help,
+как и для любого другого файла помощи, нужно, чтобы он находился в папке
+{~/.vim/doc/}. Кроме того файлы помощи должны быть проиндексированы. Если команда
+:help не находит файл, нужно выполнить такую команду, находясь в vim:
+>
+    :helptags ~/.vim/doc
+<
+
+================================================================================
+ДОБАВЛЕНИЕ СНИППЕТОВ					*emmet-ultisnips-css-addsnippet*
+
+Сниппеты находятся в отдельном файле {emmet-css.snippets}, который подключается к файлу
+css.snippets с помощью инструкции {extends} (смотрите |UltiSnips-basic-syntax|).
+Конфликтов типов файлов не возникает, так как вряд-ли нужно будет создавать файл
+с расширением '.emmet-css'.
+
+Cниппеты можно изменять как обычно для плагина UltiSnips:
+- Можно добавлять новые сниппеты в файл {css.snippets} в папке со сниппетами.
+- Можно посмотреть как реализованы сниппеты, или изменить их - они находятся в
+  файле {emmet-css.snippets} в папке со сниппетами.
+
+В файле сниппетов {emmet-css.snippets} все сниппеты разделены на группы точно
+так-же, как в данном файле помощи, но порядок сниппетов внутри группы может
+отличаться.
+
+================================================================================
+1. Визуальное форматирование				*emmet-ultisnips-css-formatting*
+
+pos, pos:r	position: relative;
+pos:s		position: static;
+pos:a		position: absolute;
+pos:f		position: fixed;
+t		top:
+t:a		top: auto;
+r		right:
+r:a		right: auto;
+b		bottom:
+b:a		bottom: auto;
+l		left:
+l:a		left: auto;
+z		z-index:
+z:a		z-index: auto;
+fl, fl:l	float: left;
+fl:r		rloat: right;
+cl, cl:b	clear: both;
+cl:n		clear: none;
+cl:l		clear: left;
+cl:r		clear: right;
+d, d:b		display: block;
+d:n		display: none;
+d:f		display: flex;
+d:if		display: inline-flex;
+d:i		display: inline;
+d:ib		display: inline-block;
+d:li		display: list-item;
+d:ri		display: run-in;
+d:cp		display: compact;
+d:tb		display: table;
+d:itb		display: inline-table;
+d:tbcp		display: table-caption;
+d:tbcl		display: table-column;
+d:tbclg		display: table-column-group;
+d:tbhg		display: table-header-group;
+d:tbfg		display: table-footer-group;
+d:tbr		display: table-row;
+d:tbrg		display: table-row-group;
+d:tbc		display: table-cell;
+v, v:h		visibility: hidden;
+v:v		visibility: visible;
+v:c		visibility: collapse;
+ov, ov:h	overflow: hidden;
+ov:v		overflow: visible;
+ov:s		overflow: scroll;
+ov:a		overflow: auto;
+cp,cp:r		clip: rect(top right bottom left);
+cp:a		clip: auto;
+rsz		resize:
+rsz:n		resize: none;
+cu, cur, cur:p	cursor: pointer;
+cur:a		cursor: auto;
+cur:d		cursor: default;
+cur:c		cursor: crosshair;
+cur:ha		cursor: hand;
+cur:he		cursor: help;
+cur:m		cursor: move;
+cur:t		cursor: text;
+
+================================================================================
+2. Отступы и поля					*emmet-ultisnips-css-margin_padding*
+
+m, mn		margin:
+m:a		margin: auto;
+mt		margin-top:
+mt:a		margin-top: auto;
+mr		margin-right:
+mr:a		margin-right: auto;
+mb		margin-bottom:
+mb:a		margin-bottom: auto;
+ml		margin-left:
+ml:a		margin-left: auto;
+p, pn		padding:
+pt		padding-top:
+pr		padding-right:
+pb		padding-bottom:
+pl		padding-left:
+
+================================================================================
+3. Границы (border)					*emmet-ultisnips-css-border*
+
+bd		border: 1px solid #000;
+bd:n		border: none;
+bdcl, bdcl:c	border-collapse: collapse;
+bdcl:s		border-collapse: separate;
+bdc		border-color: #000;
+bdc:t		border-color: transparent;
+bdi		border-image: url();
+bdi:n		border-image: none;
+bdsp		border-spacing:
+bds		border-style:
+bds:n		border-style: none;
+bds:h		border-style: hidden;
+bds:dt		border-style: dotted;
+bds:ds		border-style: dashed;
+bds:s		border-style: solid;
+bds:db		border-style: double;
+bds:dtds	border-style: dot-dash;
+bds:w		border-style: wave;
+bds:g		border-style: groove;
+bds:r		border-style: ridge;
+bds:i		border-style: inset;
+bds:o		border-style: outset;
+bdw		border-width:
+
+bt, bdt		border-top: 1px solid #000;
+bdt:n		border-top: none;
+bdtw		border-top-width:
+bdts		border-top-style:
+bdts:n		border-top-style: none;
+bdtc		border-top-color: #000;
+bdtc:t		border-top-color: transparent;
+
+bdr, br		border-right: 1px solid #000;
+bdr:n		border-right: none;
+bdrw		border-right-width:
+bdrs		border-right-style:
+bdrs:n		border-right-style: none;
+bdrc		border-right-color: #000;
+bdrc:t		border-right-color: transparent;
+
+bdb, bb		border-bottom: 1px solid #000;
+bdb:n		border-bottom: none;
+bdbw		border-bottom-width:
+bdbs		border-bottom-style:
+bdbs:n		border-bottom-style: none;
+bdbc		border-bottom-color: #000;
+bdbc:t		border-bottom-color: transparent;
+
+
+bdl, bl		border-left: 1px solid #000;
+bdl:n		border-left: none;
+bdlw		border-left-width:
+bdls		border-left-style:
+bdls:n		border-left-style: none;
+bdlc		border-left-color: #000;
+bdlc:t		border-left-color: transparent;
+
+================================================================================
+4. Обводка (outline)					*emmet-ultisnips-css-outline*
+
+ol		outline:
+ol:n		outline: none;
+olo		outline-offset:
+olw		outline-width:
+olw:t		outline-width: thin;
+olw:m		outline-width: medium;
+olw:tc		outline-width: thick;
+ols		outline-style:
+ols:n		outline-style: none;
+ols:dt		outline-style: dotted;
+ols:ds		outline-style: dashed;
+ols:s		outline-style: solid;
+ols:db		outline-style: double;
+ols:g		outline-style: groove;
+ols:r		outline-style: ridge;
+ols:i		outline-style: inset;
+ols:o		outline-style: outset;
+olc		outline-color: #000;
+olc:i		outline-color: invert;
+
+
+================================================================================
+5. Box-sizing						*emmet-ultisnips-css-box-sizing*
+
+bxz, bxz:bb	box-sizing: border-box;
+bxz:cb		box-sizing: content-box;
+bxsh		box-shadow: inset hoff voff blur spread #000;
+bxsh:n		box-shadow: none;
+w		width:
+w:a		width: auto;
+h		height:
+h:a		height: auto;
+maw		max-width:
+maw:n		max-width: none;
+mah		max-height:
+mah:n		max-height: none;
+miw		min-width:
+mih		min-height:
+
+
+================================================================================
+6. Шрифт						*emmet-ultisnips-css-font*
+
+f		font:
+f+		font: 1em "Liberation Sans",Arial,Helvetica,sans-serif;
+fw		font-weight:
+fw:n		font-weight: normal;
+fw:b		font-weight: bold;
+fw:br		font-weight: bolder;
+fw:lr		font-weight: lighter;
+fs		font-style: italic;
+fs:i		font-style: italic;
+fs:n		font-style: normal;
+fs:o		font-style: oblique;
+fv		font-variant:
+fv:n		font-variant: normal;
+fv:sc		font-variant: small-caps;
+fz		font-size:
+ff		font-family:
+ff:s		font-family: "Liberation Serif","Times New Roman",Times,serif;
+ff:ss		font-family: "Liberation Sans",Arial,Helvetica,sans-serif;
+ff:m		font-family: "Courier New", Courier, monospace;
+
+================================================================================
+7. Текст						*emmet-ultisnips-css-text*
+
+va, va:t	vertical-align: top;
+va:sup		vertical-align: super;
+va:tt		vertical-align: text-top;
+va:m		vertical-align: middle;
+va:bl		vertical-align: baseline;
+va:b		vertical-align: bottom;
+va:tb		vertical-align: text-bottom;
+va:sub		vertical-align: sub;
+ta, ta:l	text-align: left;
+ta:c		text-align: center;
+ta:r		text-align: right;
+ta:j		text-align: justify;
+td, td:n	text-decoration: none;
+td:u		text-decoration: underline;
+td:o		text-decoration: overline;
+td:l		text-decoration: line-through;
+ti		text-indent:
+tt, tt:u	text-transform: uppercase;
+tt:n		text-transform: none;
+tt:c		text-transform: capitalize;
+tt:l		text-transform: lowercase;
+tsh		text-shadow: hoff voff blur #000;
+tsh:n		text-shadow: none;
+lh		line-height:
+lts		letter-spacing:
+lts:n		letter-spacing: normal;
+whs, whs:p	white-space: pre;
+whs:n		white-space: normal;
+wob		word-break:
+wob:n		word-break: normal;
+wos		word-spacing:
+tov, tov:e	text-overflow: elipsis;
+tov:c		text-overflow: clip;
+
+================================================================================
+8. Цвет							*emmet-ultisnips-css-color*
+
+c		color: #000;
+op		opacity:
+
+================================================================================
+9. Задний фон						*emmet-ultisnips-css-background*
+
+bg		background: #000;
+bg+		background: #fff url() 0 0 no-repeat;
+bg:n		background: none;
+bgc		background-color: #fff;
+bgc:t		background-color: transparent;
+bgi		background-image: url();
+bgi:n		background-image: none;
+bgr		background-repeat:
+bgr:n		background-repeat: no-repeat;
+bgr:x		background-repeat: repeat-x;
+bgr:y		background-repeat: repeat-y;
+bgr:sp		background-repeat: space;
+bgr:rd		background-repeat: round;
+bga		background-attachment:
+bga:f		background-attachment: fixed;
+bga:s		background-attachment: scroll;
+bgp		background-position: 0 0;
+bgpx		background-position-x:
+bgpy		background-position-y:
+bgcp, bgcp:pb	background-clip: padding-box;
+bgcp:cb		background-clip: content-box;
+bgo		background-origin:
+bgo:pb		background-origin: padding-box;
+bgo:bb		background-origin: border-box;
+bgo:cb		background-origin: content-box;
+bgsz		background-size:
+bgsz:a		background-size: auto;
+bgsz:ct		background-size: contain;
+bgsz:cv		background-size: cover;
+
+================================================================================
+10. Содержимое						*emmet-ultisnips-css-content*
+
+cnt, ct		content: ' ';
+cnt:n		content: normal;
+cnt:oq		content: open-quote;
+cnt:noq		content: no-open-quote;
+cnt:cq		content: close-quote;
+cnt:ncq		content: no-close-quote;
+cnt:a		content: attr(
+cnt:c		content: counter;
+q		quotes:
+q:n		quotes: none;
+q:ru		quotes: '\00AB' '\00BB' '\201E' '\201C';
+q:en		quotes: '\201C' '\201D' '\2018' '\2019';
+coi		counter-increment:
+cor		counter-reset:
+
+================================================================================
+11. Таблицы						*emmet-ultisnips-css-table*
+
+tbl		table-layout:
+tbl:a		table-layout: auto;
+tbl:f		table-layout: fixed;
+cps		caption-side:
+cps:t		caption-side: top;
+cps:b		caption-side: bottom;
+ec		empty-cells:
+ec:s		empty-cells: show;
+ec:h		empty-cells: hide;
+
+================================================================================
+12. Списки						*emmet-ultisnips-css-list*
+
+lis		list-style:
+lis:n		list-style: none;
+lisp		list-style-position:
+lisp:i		list-style-position: inside;
+lisp:o		list-style-position: outside;
+list		list-style-type:
+list:n		list-style-type: none;
+list:d		list-style-type: disc;
+list:c		list-style-type: circle;
+list:s		list-style-type: square;
+list:dc		list-style-type: decimal;
+list:dclz	list-style-type: decimal-leading-zero;
+list:lr		list-style-type: lower-roman;
+list:ur		list-style-type: upper-roman;
+lisi		list-style-image: url();
+lisi:n		list-style-image: none;
+
+================================================================================
+13. Выравнивание (для FlexBox и Grid)				*emmet-ultisnips-css-align*
+
+ac		align-content:
+ac:c		align-content: center;
+ac:fe		align-content: flex-end;
+ac:fs		align-content: flex-start;
+ac:s		align-content: stretch;
+ac:sa		align-content: space-around;
+ac:sb		align-content: space-between;
+ai		align-items:
+ai:b		align-items: baseline;
+ai:c		align-items: center;
+ai:fe		align-items: flex-end;
+ai:fs		align-items: flex-start;
+ai:s		align-items: stretch;
+
+as		align-self:
+as:b		align-self: auto;
+as:b		align-self: baseline;
+as:c		align-self: center;
+as:fe		align-self: flex-end;
+as:fs		align-self: flex-start;
+as:s		align-self: stretch;
+
+jc		justify-content:
+jc:c		justify-content: center;
+jc:fe		justify-content: flex-end;
+jc:fs		justify-content: flex-start;
+jc:sa		justify-content: space-around;
+jc:sb		justify-content: space-between;
+
+================================================================================
+14. Трансформации					*emmet-ultisnips-css-transform*
+
+trf		transform:
+trf:n		transform: none;
+trf:r		transform: rotate(angle);
+trf:rx		transform: rotateX(angle);
+trf:ry		transform: rotateY(angle);
+trf:rz		transform: rotateZ(angle);
+trf:sc		transform: scale(x,y);
+trf:sc3		transform: scale3d(x,y,z);
+trf:scx		transform: scaleX(x);
+trf:scy		transform: scaleY(y);
+trf:scz		transform: scaleZ(z);
+trf:skx		transform: skewX(x);
+trf:sky		transform: skewY(y);
+trf:t		transform: translate(x,y);
+trf:t3		transform: translate3d(x,y,z);
+trf:tx		transform: translateX(x);
+trf:ty		transform: translateY(y);
+trf:tz		transform: translateZ(z);
+
+trfo		transform-origin: x y z;
+trfs		transform-style: preserve-3d;
+trs		transition: prop time;
+trsde		transition-delay:
+trsdu		transition-duration:
+trsp		transition-property:
+trstf		transition-timing-function:
+
+================================================================================
+15. Анимация						*emmet-ultisnips-css-animation*
+
+anim		animation:
+anim+		animation: name duration timing-function delay iteration-count direction fill-mode;
+animdel		animation-delay:
+animdir		animation-direction: normal;
+animdir:n	animation-direction: normal;
+animdir:a	animation-direction: alternate;
+animdir:ar	animation-direction: alternate-reverse;
+animdir:r	animation-direction: reverse;
+animdur		animation-duraton: 1s;
+animfm		animation-fill-mode: both;
+animfm:bt	animation-fill-mode: both;
+animfm:bh	animation-fill-mode: both;
+animfm:b	animation-fill-mode: backwards;
+animic		animation-iteration-count: 1;
+animic:i	animation-iteration-count: infinite;
+animn		animation-name: none;
+animps		animation-play-state: running;
+animps:r	animation-play-state: running;
+animps:p	animation-play-state: paused;
+animtf		animation-timing-function: linear;
+animtf:l	animation-timing-function: linear;
+animtf:cb	animation-timing-function: cubic-bezier(0.1,0.7,1.0,0.1);
+animtf:e	animation-timing-function: ease;
+animtf:ei	animation-timing-function: ease-in;
+animtf:eio	animation-timing-function: ease-in-out;
+animtf:eo	animation-timing-function: ease-out;
+
+================================================================================
+16. Flex-Box						*emmet-ultisnips-css-flexbox*
+
+fx		flex:
+fxb		flex-basis:
+fxd, fxd:c	flex-direction: column;
+fxd:cr		flex-direction: column-reverse;
+fxd:r		flex-direction: row;
+fxd:rr		flex-direction: row-reverse;
+fxf		flex-flow:
+fxg		flex-grow:
+fxsh		flex-shrink:
+fxw		flex-wrap:
+fxw:n		flex-wrap: none;
+fxw:w		flex-wrap: wrap;
+fxw:wr		flex-wrap: wrap-reverse;
+
+================================================================================
+17. Grid						*emmet-ultisnips-css-grid*
+
+ga		grid-area:
+gg		grid-gap:
+gc		grid-column:
+gr		grid-row:
+gta		grid-template-areas:
+
+gtc		grid-template-columns:
+gtc:a		grid-template-columns: auto;
+gtc:ma		grid-template-columns: max-content;
+gtc:mi		grid-template-columns: min-content;
+gtc:n		grid-template-columns: none;
+gtr		grid-template-rows:
+gtr:a		grid-template-rows: auto;
+gtr:ma		grid-template-rows: max-content;
+gtr:mi		grid-template-rows: min-content;
+gtr:n		grid-template-rows: none;
+
+gaf		grid-auto-flow:
+gaf		grid-auto-flow: column;
+gaf		grid-auto-flow: dense;
+gaf		grid-auto-flow: row;
+gaf		grid-auto-flow: column dense;
+gaf		grid-auto-flow: row dense
+
+gac		grid-auto-columns:
+gac:a		grid-auto-columns: auto;
+gac:fc		grid-auto-columns: fit-content(
+gac:ma		grid-auto-columns: max-content;
+gac:mi		grid-auto-columns: min-content;
+gar		grid-auto-rows:
+gar:a		grid-auto-rows: auto;
+gar:fc		grid-auto-rows: fit-content(
+gar:max		grid-auto-rows: max-content;
+gar:min		grid-auto-rows: min-content;
+
+gcs		grid-column-start:
+gce		grid-column-end:
+grs		grid-row-start:
+gre		grid-row-end:
+
+================================================================================
+18. Печать						*emmet-ultisnips-css-print*
+
+pgbb		page-break-before:
+pgbb:a		page-break-before: auto;
+pgbb:al		page-break-before: always;
+pgbb:l		page-break-before: left;
+pgbb:r		page-break-before: right;
+
+pgbi		page-break-inside:
+pgbi:a		page-break-inside: auto;
+pgbi:av		page-break-inside: avoid;
+
+pgba		page-break-after:
+pgba:a		page-break-after: auto;
+pgba:al		page-break-after: always;
+pgba:l		page-break-after: left;
+pgba:r		page-break-after: right;
+
+================================================================================
+19. At-правила (@...)					*emmet-ultisnips-css-at_rules*
+
+@f		@font-face {
+		  font-family: 'FontName';
+     		  src: url('FileName.woff2') format('woff2'),
+     		       url('FileName.woff') format('woff'),
+		  font-style: normal;
+		  font-weight: normal;
+		}
+
+@f+		@font-face {
+		  font-family: 'FontName';
+		  src: url('FileName.eot');
+		  src: url('FileName.eot?#iefix') format('embedded-opentype'),
+     		       url('FileName.woff2') format('woff2'),
+     		       url('FileName.woff') format('woff'),
+     		       url('FileName.ttf') format('truetype'),
+     		       url('FileName.svg#FontName') format('svg');
+		  font-style: normal;
+		  font-weight: normal;
+		}
+
+@i, @import	@import url();
+
+@kf		@keyframes identifier {
+		  from {  }
+		  to {  }
+		}
+
+@m, media	@media screen and (max-width: 480px) {
+
+		}
+
+@s		@supports (condition) {
+
+		}
+
+================================================================================
+
+20. Дополнительные сокращения				*emmet-ultisnips-css-misc*
+
+Эти сокращения разворачиваются в любом месте, а не только в начале строки.
+
+{		{
+
+		}
+
+!		!important
+r		rgb(
+a		rgba( ,.5)
+
+================================================================================
+
+"vim:tw=78:ts=8:ft=help:norl:colorcolumn=+3:
+
