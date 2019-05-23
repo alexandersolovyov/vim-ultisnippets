@@ -1,47 +1,49 @@
-*emmet-ultisnips-css.rux*		Emmet for UltiSnips *emmet-css*
+*css-snippets.rux*		CSS for UltiSnips *css-snippets* *snippets-css*
 
-		Сниппеты в стиле Emmet для плагина UltiSnips
+			Сниппеты для плагина UltiSnips
 				для файлов CSS
 
 Author: Alexander Solovyov <alexander-solovyov@yandex.ru>
-Repository: {https://github.com/alexandersolovyov/emmet-ultisnips}
+Repository: {https://github.com/alexandersolovyov/snippets-ultisnips}
 Snippets file: {<path-to-snippets>/emmet-css.snippets}
 License: GNU GPLv2
 
 ================================================================================
 Cодержание
 
-Общие сведения						|emmet-ultisnips-css-notes|
-О справочнике сокращений				|emmet-ultisnips-css-about|
-Установка						|emmet-ultisnips-css-install|
-Добавление сниппетов					|emmet-ultisnips-css-addsnippet|
+Общие сведения						|css-snippets-notes|
+О справочнике сокращений				|css-snippets-about|
+Установка						|css-snippets-install|
+Добавление сниппетов					|css-snippets-addsnippet|
 
-1. Визуальное форматирование				|emmet-ultisnips-css-formatting|
-2. Отступы и поля					|emmet-ultisnips-css-margin_padding|
-3. Границы (border)					|emmet-ultisnips-css-border|
-4. Обводка (outline)					|emmet-ultisnips-css-outline|
-5. Box-sizing						|emmet-ultisnips-css-box-sizing|
-6. Шрифт						|emmet-ultisnips-css-font|
-7. Текст						|emmet-ultisnips-css-text|
-8. Цвет							|emmet-ultisnips-css-color|
-9. Задний фон						|emmet-ultisnips-css-background|
-10. Содержимое						|emmet-ultisnips-css-content|
-11. Таблицы						|emmet-ultisnips-css-table|
-12. Списки						|emmet-ultisnips-css-list|
-13. Выравнивание (для FlexBox и Grid)			|emmet-ultisnips-css-align|
-14. Трансформации					|emmet-ultisnips-css-transform|
-15. Анимация						|emmet-ultisnips-css-animation|
-16. Flex-Box						|emmet-ultisnips-css-flexbox|
-17. Grid						|emmet-ultisnips-css-grid|
-18. Печать						|emmet-ultisnips-css-print|
-19. At-правила (@...)					|emmet-ultisnips-css-at_rules|
-20. Дополнительные сокращения				|emmet-ultisnips-css-misc|
+1. Визуальное форматирование				|css-snippets-formatting|
+2. Отступы и поля					|css-snippets-margin_padding|
+3. Границы (border)					|css-snippets-border|
+4. Обводка (outline)					|css-snippets-outline|
+5. Box-sizing						|css-snippets-box-sizing|
+6. Шрифт						|css-snippets-font|
+7. Текст						|css-snippets-text|
+8. Цвет							|css-snippets-color|
+9. Задний фон						|css-snippets-background|
+10. Содержимое						|css-snippets-content|
+11. Таблицы						|css-snippets-table|
+12. Списки						|css-snippets-list|
+13. Выравнивание (для FlexBox и Grid)			|css-snippets-align|
+14. Трансформации					|css-snippets-transform|
+15. Анимация						|css-snippets-animation|
+16. Flex-Box						|css-snippets-flexbox|
+17. Grid						|css-snippets-grid|
+18. Печать						|css-snippets-print|
+19. At-правила (@...)					|css-snippets-at_rules|
+20. Дополнительные сокращения				|css-snippets-misc|
 
 ================================================================================
-ОБЩИЕ СВЕДЕНИЯ					*emmet-ultisnips-css-notes*
+ОБЩИЕ СВЕДЕНИЯ					*css-snippets-notes*
 
 В этом документе приведен справочник сокращений, используемых сниппетами
-в стиле плагина Emmet для файлов CSS, реализованными для плагина Ultisnips.
+для плагина UltiSnips для работы с файлами CSS.
+Они сделаны по подобию сниппетов в стиле плагина Emmet для файлов CSS,
+но немного отличаются.
 
 Для использования сниппета - как обычно, просто введите сокращение в стиле
 Emmet и нажмите клавишу-триггер (по-умолчанию <Tab>).
@@ -77,7 +79,7 @@ Emmet и нажмите клавишу-триггер (по-умолчанию <
   {attr()}, скобку и точку с запятой.
 
 ================================================================================
-О справочнике сокращений				|emmet-ultisnips-css-about|
+О справочнике сокращений				|css-snippets-about|
 
 У большинства сокращений есть вариант, заканчивающийся двоеточием.
 Например: {ff} значит то-же самое, что и {ff:}.
@@ -95,7 +97,7 @@ Emmet и нажмите клавишу-триггер (по-умолчанию <
 будет развёрнуто в ту же самую строку (хотя в справочнике это не указано).
 
 ================================================================================
-УСТАНОВКА						*emmet-ultisnips-css-install*
+УСТАНОВКА						*css-snippets-install*
 
 Для правильной работы сниппетов, файл со сниппетами {emmet-css.snippets}
 должен находиться в одной из папок со сниппетами UltiSnips.
@@ -127,7 +129,7 @@ Emmet и нажмите клавишу-триггер (по-умолчанию <
 <
 
 ================================================================================
-ДОБАВЛЕНИЕ СНИППЕТОВ					*emmet-ultisnips-css-addsnippet*
+ДОБАВЛЕНИЕ СНИППЕТОВ					*css-snippets-addsnippet*
 
 Сниппеты находятся в отдельном файле {emmet-css.snippets}, который подключается к файлу
 css.snippets с помощью инструкции {extends} (смотрите |UltiSnips-basic-syntax|).
@@ -144,7 +146,7 @@ Cниппеты можно изменять как обычно для плаг�
 отличаться.
 
 ================================================================================
-1. Визуальное форматирование				*emmet-ultisnips-css-formatting*
+1. Визуальное форматирование				*css-snippets-formatting*
 
 pos, pos:r	position: relative;
 pos:s		position: static;
@@ -206,7 +208,7 @@ cur:m		cursor: move;
 cur:t		cursor: text;
 
 ================================================================================
-2. Отступы и поля					*emmet-ultisnips-css-margin_padding*
+2. Отступы и поля					*css-snippets-margin_padding*
 
 m, mn		margin:
 m:a		margin: auto;
@@ -225,7 +227,7 @@ pb		padding-bottom:
 pl		padding-left:
 
 ================================================================================
-3. Границы (border)					*emmet-ultisnips-css-border*
+3. Границы (border)					*css-snippets-border*
 
 bd		border: 1px solid #000;
 bd:n		border: none;
@@ -285,7 +287,7 @@ bdlc		border-left-color: #000;
 bdlc:t		border-left-color: transparent;
 
 ================================================================================
-4. Обводка (outline)					*emmet-ultisnips-css-outline*
+4. Обводка (outline)					*css-snippets-outline*
 
 ol		outline:
 ol:n		outline: none;
@@ -309,7 +311,7 @@ olc:i		outline-color: invert;
 
 
 ================================================================================
-5. Box-sizing						*emmet-ultisnips-css-box-sizing*
+5. Box-sizing						*css-snippets-box-sizing*
 
 bxz, bxz:bb	box-sizing: border-box;
 bxz:cb		box-sizing: content-box;
@@ -328,7 +330,7 @@ mih		min-height:
 
 
 ================================================================================
-6. Шрифт						*emmet-ultisnips-css-font*
+6. Шрифт						*css-snippets-font*
 
 f		font:
 f+		font: 1em "Liberation Sans",Arial,Helvetica,sans-serif;
@@ -351,7 +353,7 @@ ff:ss		font-family: "Liberation Sans",Arial,Helvetica,sans-serif;
 ff:m		font-family: "Courier New", Courier, monospace;
 
 ================================================================================
-7. Текст						*emmet-ultisnips-css-text*
+7. Текст						*css-snippets-text*
 
 va, va:t	vertical-align: top;
 va:sup		vertical-align: super;
@@ -388,13 +390,13 @@ tov, tov:e	text-overflow: elipsis;
 tov:c		text-overflow: clip;
 
 ================================================================================
-8. Цвет							*emmet-ultisnips-css-color*
+8. Цвет							*css-snippets-color*
 
 c		color: #000;
 op		opacity:
 
 ================================================================================
-9. Задний фон						*emmet-ultisnips-css-background*
+9. Задний фон						*css-snippets-background*
 
 bg		background: #000;
 bg+		background: #fff url() 0 0 no-repeat;
@@ -427,7 +429,7 @@ bgsz:ct		background-size: contain;
 bgsz:cv		background-size: cover;
 
 ================================================================================
-10. Содержимое						*emmet-ultisnips-css-content*
+10. Содержимое						*css-snippets-content*
 
 cnt, ct		content: ' ';
 cnt:n		content: normal;
@@ -445,7 +447,7 @@ coi		counter-increment:
 cor		counter-reset:
 
 ================================================================================
-11. Таблицы						*emmet-ultisnips-css-table*
+11. Таблицы						*css-snippets-table*
 
 tbl		table-layout:
 tbl:a		table-layout: auto;
@@ -458,7 +460,7 @@ ec:s		empty-cells: show;
 ec:h		empty-cells: hide;
 
 ================================================================================
-12. Списки						*emmet-ultisnips-css-list*
+12. Списки						*css-snippets-list*
 
 lis		list-style:
 lis:n		list-style: none;
@@ -478,7 +480,7 @@ lisi		list-style-image: url();
 lisi:n		list-style-image: none;
 
 ================================================================================
-13. Выравнивание (для FlexBox и Grid)				*emmet-ultisnips-css-align*
+13. Выравнивание (для FlexBox и Grid)				*css-snippets-align*
 
 ac		align-content:
 ac:c		align-content: center;
@@ -510,7 +512,7 @@ jc:sa		justify-content: space-around;
 jc:sb		justify-content: space-between;
 
 ================================================================================
-14. Трансформации					*emmet-ultisnips-css-transform*
+14. Трансформации					*css-snippets-transform*
 
 trf		transform:
 trf:n		transform: none;
@@ -540,7 +542,7 @@ trsp		transition-property:
 trstf		transition-timing-function:
 
 ================================================================================
-15. Анимация						*emmet-ultisnips-css-animation*
+15. Анимация						*css-snippets-animation*
 
 anim		animation:
 anim+		animation: name duration timing-function delay iteration-count direction fill-mode;
@@ -570,7 +572,7 @@ animtf:eio	animation-timing-function: ease-in-out;
 animtf:eo	animation-timing-function: ease-out;
 
 ================================================================================
-16. Flex-Box						*emmet-ultisnips-css-flexbox*
+16. Flex-Box						*css-snippets-flexbox*
 
 fx		flex:
 fxb		flex-basis:
@@ -587,7 +589,7 @@ fxw:w		flex-wrap: wrap;
 fxw:wr		flex-wrap: wrap-reverse;
 
 ================================================================================
-17. Grid						*emmet-ultisnips-css-grid*
+17. Grid						*css-snippets-grid*
 
 ga		grid-area:
 gg		grid-gap:
@@ -630,7 +632,7 @@ grs		grid-row-start:
 gre		grid-row-end:
 
 ================================================================================
-18. Печать						*emmet-ultisnips-css-print*
+18. Печать						*css-snippets-print*
 
 pgbb		page-break-before:
 pgbb:a		page-break-before: auto;
@@ -649,7 +651,7 @@ pgba:l		page-break-after: left;
 pgba:r		page-break-after: right;
 
 ================================================================================
-19. At-правила (@...)					*emmet-ultisnips-css-at_rules*
+19. At-правила (@...)					*css-snippets-at_rules*
 
 @f		@font-face {
 		  font-family: 'FontName';
@@ -688,7 +690,7 @@ pgba:r		page-break-after: right;
 
 ================================================================================
 
-20. Дополнительные сокращения				*emmet-ultisnips-css-misc*
+20. Дополнительные сокращения				*css-snippets-misc*
 
 Эти сокращения разворачиваются в любом месте, а не только в начале строки.
 
