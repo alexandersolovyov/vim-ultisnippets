@@ -1,3 +1,90 @@
+# TEMPLATES-------------------------------
+snippet '[!]|(html[:]?5?)' "HTML5 page structure" br
+<!DOCTYPE html>
+
+<html dir="ltr" lang="${1:ru}">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>$2</title>
+	$3
+</head>
+<body>
+	$4
+</body>
+</html>
+endsnippet
+
+snippet table "simple table template" b
+<table$1>
+	<tr$2>
+		<td$3>$4</td>
+	</tr>
+</table>
+endsnippet
+
+snippet ul "unordered list template" b
+<ul$1>
+	<li$2>$3</li>
+</ul>
+endsnippet
+
+snippet ol "ordered list template" b
+<ol$1>
+	<li$2>$3</li>
+</ol>
+endsnippet
+
+snippet dl "ordered list template" b
+<dl$1>
+	<dt$2>$3</dt>
+	<dd$4>
+		$5
+	</dd>
+</dl>
+endsnippet
+
+snippet figure "figure template" b
+<figure$1>
+	<img src="$2" alt="$3" />
+	<figcaption$4>$5</figcaption>
+</figure>
+endsnippet
+
+snippet colgroup: "colgroup template" b
+<colgroup$1>
+	<col span="$2" $3/>
+</colgroup>
+endsnippet
+
+snippet 'login-form(:(\S+))?' "login form template" br
+<form class="${1:login-form}" action="${2:`!p if match.group(2): snip.rv=match.group(2)`}" method="post">
+	<p>
+		<label for="${3:who}">${4:Name:}</label>
+		<input type="text" name="$3" id="$3" $5/>
+	</p>
+	<p>
+		<label for="${6:pass}">${7:Password:}</label>
+		<input type="password" name="$6" id="$6" $8/>
+	</p>
+	<p>
+		<input type="submit" value="${9:Log In}" $10/>
+	</p>
+</form>
+endsnippet
+
+snippet 'file-form(:(\S+))?' "login form template" br
+<form class="${1:file-form}" action="${2:`!p if match.group(2): snip.rv=match.group(2)`}" enctype="multipart/form-data" method="post">
+	<p>
+		<label for="${3:file_to_send}">${4:Choose file to send:}</label>
+	</p>
+	<p>
+		<input type="file" name="${5:file_to_send}" $6/>
+		<input type="submit" value="${7:Send}" $8/>
+	</p>
+</form>
+endsnippet
+
 # ---Multi-line elements
 
 snippet '<(\w+).*>$' "Close multi-line element" r
@@ -72,24 +159,6 @@ endsnippet
 
 # ---Constructions
 
-snippet <! "DOCTYPE definition" b
-<!DOCTYPE html>
-
-endsnippet
-
-snippet <html "HTML page structure" b
-<html dir="ltr" lang="${1:ru}">
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>$2</title>
-	$3
-</head>
-<body>
-	$4
-</body>
-</html>
-endsnippet
 
 #===============================================================
 # In visual mode - surround by tags

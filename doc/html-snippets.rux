@@ -163,7 +163,7 @@ colgroup: ->
 
 login-form:handler.php ->
 >
-  <form action="handler.php" method="post">
+  <form class="{login-form}" action="handler.php" method="post">
     <p>
       <label for="{who}">{Name:}</label>
       <input type="text" name="{who}" id="{who}" />
@@ -179,12 +179,12 @@ login-form:handler.php ->
 <
 file-form:handler.php ->
 >
-  <form action="handler.php" enctype="multipart/form-data" method="post">
+  <form class="{file-form}" action="handler.php" enctype="multipart/form-data" method="post">
     <p>
       <label for="{file_to_send}">{Choose file to send:}</label>
     <p>
-      <input type="file" name="{file_to_send}">
-      <input type="submit" value="{Send}">
+      <input type="file" name="{file_to_send}" />
+      <input type="submit" value="{Send}" />
     </p>
   </form>
 <
