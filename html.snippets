@@ -90,12 +90,25 @@ endsnippet
 snippet button "button" b
 <button id="$1">$2</button>
 endsnippet
-snippet 'button\s?"([^"\s]+)(?:"\s?"?([^"\s]+))?"?' "button with values" br
+snippet 'button\s?"([^"\s]+)"?' "button with values" br
+<button id="`!p name=snip.rv=match.group(1)`">
+	$1
+</button>
+endsnippet
+snippet 'fbutton\s?"([^"\s]+)(?:"\s?"?([^"\s]+))?"?' "form button with values" br
 <button id="`!p name=snip.rv=match.group(1)`" name="`!p snip.rv=name`"`!p
 if match.group(2): snip.rv=' value="'+match.group(2)+'"'`>
 	$1
 </button>
 endsnippet
+
+snippet colgroup "colgroup" b
+<colgroup span="$1" $2/>
+endsnippet
+snippet col "col" b
+<col span="$1" $2/>
+endsnippet
+
 
 # ---Multi-line elements
 

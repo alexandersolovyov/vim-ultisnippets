@@ -269,7 +269,6 @@ fbutton"btn-name"val ->
   </button>
 <
 
-
 colgroup ->
 >
   <colgroup span="" />
@@ -278,22 +277,6 @@ colgroup ->
 col ->
 >
   <col span="" />
-<
-
-dt ->
->
-  <dt></dt>
-<
-
-dl ->
->
-  <dl>
-  </dl>
-<
-
-li ->
->
-  <li></li>
 <
 
 meta-charset ->
@@ -321,11 +304,6 @@ link ->
   <link rel="{stylesheet}" type="{text/css}" href="" />
 <
 
-p ->
->
-  <p>
-  </p>
-<
 rss"my_rss.xml ->
 >
   <link rel="alternate" type="application/rss+xml" title="RSS" href="my_rss.xml" />
@@ -396,7 +374,24 @@ meta-viewport"non-scalable ->
   figcaption	->  <figcaption></figcaption>
 <
 Эти сниппеты позволяют ввести атрибуты через пробел после имени
-элемента и потом нажать <Tab>.
+элемента и потом нажать <Tab> например так:
+>
+  <p>I want to emphasize that em class="red"  ->
+
+  <p>I want to emphasize that <em class="red"></em>
+>
+Здесь вместо того, чтобы вводить класс и идентификатор полностью,
+можно воспользоваться сокращениями, описанными в
+|html-snippets-misc-spec_atttributes| или в
+|html-snippets-misc-any_atttributes|.
+
+Также есть строчные элементы, сокращения которыех будут разворачиваться
+только в начале строки. Вот они:
+>
+  dt
+  li
+<
+
 
 ---------------------
   Блочные элементы			*html-snippets-elements-block*
@@ -411,7 +406,18 @@ aside ->
   </aside>
 <
 Эти сниппеты позволяют ввести атрибуты через пробел после имени
-элемента.
+элемента, например так:
+>
+  div id="block1" class="blocks" ->
+
+  <div id="block1" class="blocks">
+
+  </div>
+<
+Здесь вместо того, чтобы вводить класс и идентификатор полностью,
+можно воспользоваться сокращениями, описанными в
+|html-snippets-misc-spec_atttributes| или в
+|html-snippets-misc-any_atttributes|.
 
 Вот список таких элементов:
 >
@@ -434,8 +440,19 @@ aside ->
   video
 <
 
+Есть блочные элементы, которые будут разворачиваться так же,
+но не вставлять строку между тегами, например:
+>
+  p ->
 
-
+  <p>
+  </p>
+<
+Вот их список:
+>
+  p
+  dl
+<
 ================================================================================
 3.Часто используемые				*html-snippets-misc*
 
