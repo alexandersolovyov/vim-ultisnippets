@@ -215,9 +215,11 @@ file-form"handler.php ->
 Например, следующие значения будут значить одно и то-же:
 >
   button"name"value
+  button"name"value"
   button"name""value"
   button"name" "value"
   button "name" "value"
+  button "name"value"
 <
 Рассмотрим это подробнее на примере элемента img:
 >
@@ -324,6 +326,7 @@ script"file
 style ->
 >
   <style>
+
   </style>
 <
 
@@ -347,7 +350,7 @@ meta-viewport ->
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <
 
-meta-viewport"non-scalable ->
+meta-viewport"ns ->
 >
       <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 <

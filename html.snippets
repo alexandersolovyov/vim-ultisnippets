@@ -88,14 +88,14 @@ endsnippet
 # ELEMENTS-SPECIAL------------------------
 
 snippet button "button" b
-<button id="$1">$2</button>
+<button id="$1"$2>$3</button>
 endsnippet
-snippet 'button\s?"([^"\s]+)"?' "button with values" br
-<button id="`!p name=snip.rv=match.group(1)`">
-	$1
+snippet 'button\s?"([^"\s]+)"?' "button with name and value" br
+<button id="`!p name=snip.rv=match.group(1)`"$1>
+	$2
 </button>
 endsnippet
-snippet 'fbutton\s?"([^"\s]+)(?:"\s?"?([^"\s]+))?"?' "form button with values" br
+snippet 'fbutton\s?"([^"\s]+)(?:"\s?"?([^"\s]+))?"?' "form button with name and value" br
 <button id="`!p name=snip.rv=match.group(1)`" name="`!p snip.rv=name`"`!p
 if match.group(2): snip.rv=' value="'+match.group(2)+'"'`>
 	$1
@@ -107,6 +107,92 @@ snippet colgroup "colgroup" b
 endsnippet
 snippet col "col" b
 <col span="$1" $2/>
+endsnippet
+
+snippet meta-charset "meta tag with charset (UTF-8)" b
+<meta http-equiv="Content-Type" content="text/html;charset=${1:UTF-8}" />
+
+endsnippet
+snippet 'meta-charset\s?"([\w\-]+)"?' "meta tag with any charset" br
+<meta http-equiv="Content-Type" content="text/html;charset=`!p snip.rv=match.group(1)`" />
+
+endsnippet
+
+snippet favicon "favicon" b
+<link rel="icon_file" type="image/x-icon" href="$1" />
+
+endsnippet
+snippet 'favicon\s?"([^\s"]+)"?' "favicon with URL" br
+<link rel="icon_file" type="image/x-icon" href="`!p if match.group(1): snip.rv=match.group(1)`" />
+
+endsnippet
+snippet input "input" b
+<input type="${1:text}" id="$2" name="$2" value="$3" $4/>
+endsnippet
+snippet 'input\s?"([^\s"]+)(?:"\s?"?([^"\s]+))?(?:"\s?"?([^"\s]+))?"?' "input with type, name and value" br
+<input type="`!p snip.rv=match.group(1)`" `!p
+name=match.group(2)
+if name:
+    snip.rv='id="'+name+'" name="'+name+'" '
+name=match.group(3)
+if name:
+    snip.rv+='value="'+name+'" '
+`$1/>
+endsnippet
+
+snippet link "link" b
+<link rel="${1:stylesheet}" type="${2:text/css}" href="$3" />
+endsnippet
+
+snippet rss "rss" b
+<link rel="alternate" type="application/rss+xml" title="RSS" href="$1" />
+endsnippet
+snippet 'rss\s?"([^\s"]+)"?' "rss with URL" br
+<link rel="alternate" type="application/rss+xml" title="RSS" href="`!p snip.rv=match.group(1)`" />
+endsnippet
+
+snippet script "javascript block" b
+<script>
+	$1
+</script>
+endsnippet
+snippet 'script\s?"([^\s"]+)"?' "Javascript link" br
+<script src="`!p snip.rv=match.group(1)`"></script>
+endsnippet
+
+snippet style "style block" b
+<style>
+	$1
+</style>
+endsnippet
+snippet 'style\s?"([^\s"]+)"?' "style link" br
+<link rel="stylesheet" type="text/css" href="`!p snip.rv=match.group(1)`" />
+endsnippet
+
+snippet a "anchor" w
+<a href="$1"$2>$3</a>
+endsnippet
+snippet 'a\s?"([^\s"]+)"?' "anchor with URL" wr
+<a href="`!p snip.rv=match.group(1)`"$1>$2</a>
+endsnippet
+
+snippet img "img" b
+<img src="$1" alt="$2" $3/>
+endsnippet
+snippet 'img\s?"([^\s"]+)(?:"\s?"?([^"\s]+))?"?' "img with URL and alt" br
+<img src="`!p snip.rv=match.group(1)`" `!p
+if match.group(2):
+    snip.rv='alt="'+match.group(2)+'" '
+`$1/>
+endsnippet
+
+snippet meta-viewport "meta viewport scalable" b
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+endsnippet
+snippet meta-viewport"ns "meta viewport non-scalable" b
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
 endsnippet
 
 
