@@ -22,8 +22,8 @@ Cодержание
   Блочные элементы			|html-snippets-elements-block|
 3.Часто используемые				|html-snippets-misc|
   Любые элементы			|html-snippets-misc-any_block|
-  Особые атрибуты			|html-snippets-misc-spec_atttributes|
-  Любые атрибуты			|html-snippets-misc-any_atttributes|
+  Особые атрибуты			|html-snippets-misc-spec_attributes|
+  Любые атрибуты			|html-snippets-misc-any_attributes|
 
 ================================================================================
 ОБЩИЕ СВЕДЕНИЯ					*html-snippets-notes*
@@ -385,8 +385,8 @@ meta-viewport"ns ->
 >
 Здесь вместо того, чтобы вводить класс и идентификатор полностью,
 можно воспользоваться сокращениями, описанными в
-|html-snippets-misc-spec_atttributes| или в
-|html-snippets-misc-any_atttributes|.
+|html-snippets-misc-spec_attributes| или в
+|html-snippets-misc-any_attributes|.
 
 Также есть строчные элементы, сокращения которыех будут разворачиваться
 только в начале строки. Вот они:
@@ -419,8 +419,8 @@ aside ->
 <
 Здесь вместо того, чтобы вводить класс и идентификатор полностью,
 можно воспользоваться сокращениями, описанными в
-|html-snippets-misc-spec_atttributes| или в
-|html-snippets-misc-any_atttributes|.
+|html-snippets-misc-spec_attributes| или в
+|html-snippets-misc-any_attributes|.
 
 Вот список таких элементов:
 >
@@ -476,7 +476,7 @@ aside ->
 для ввода текста.
 
 ---------------------
-  Особые атрибуты			*html-snippets-misc-spec_atttributes*
+  Особые атрибуты			*html-snippets-misc-spec_attributes*
 
 Можно быстро вводить ID, класс или имя прямо в середине строки,
 если добавить в начале символ точку, диез или амперсанд:
@@ -496,7 +496,7 @@ aside ->
 <
 
 ---------------------
-  Любые атрибуты			*html-snippets-misc-any_atttributes*
+  Любые атрибуты			*html-snippets-misc-any_attributes*
 
 Можно вводить любые атрибуты без кавычек - если забыли
 поставить открывающие кавычки, то нажатие клавиши <Tab> сразу окружит
