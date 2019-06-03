@@ -57,32 +57,44 @@ snippet colgroup: "colgroup template" b
 </colgroup>
 endsnippet
 
-snippet 'login-form(:(\S+))?' "login form template" br
-<form class="${1:login-form}" action="${2:`!p if match.group(2): snip.rv=match.group(2)`}" method="post">
+snippet 'login-form\s?("([^"\s]+)"?)?' "login form template" br
+<form class="${1:login-form}" `!p if match.group(2): snip.rv='action="'+match.group(2)+'" '`method="post">
 	<p>
-		<label for="${3:who}">${4:Name:}</label>
-		<input type="text" name="$3" id="$3" $5/>
+		<label for="${2:who}">${3:Name:}</label>
+		<input type="text" name="$2" id="$2" $4/>
 	</p>
 	<p>
-		<label for="${6:pass}">${7:Password:}</label>
-		<input type="password" name="$6" id="$6" $8/>
+		<label for="${5:pass}">${6:Password:}</label>
+		<input type="password" name="$5" id="$5" $7/>
 	</p>
 	<p>
-		<input type="submit" value="${9:Log In}" $10/>
+		<input type="submit" value="${8:Log In}" $9/>
 	</p>
 </form>
 endsnippet
 
-snippet 'file-form(:(\S+))?' "login form template" br
-<form class="${1:file-form}" action="${2:`!p if match.group(2): snip.rv=match.group(2)`}" enctype="multipart/form-data" method="post">
+snippet 'file-form\s?("([^"\s]+)"?)?' "login form template" br
+<form class="${1:file-form}" `!p if match.group(2): snip.rv='action="'+match.group(2)+'" '`enctype="multipart/form-data" method="post">
 	<p>
-		<label for="${3:file_to_send}">${4:Choose file to send:}</label>
+		<label for="${2:input--file}">${3:Choose file to send:}</label>
 	</p>
 	<p>
-		<input type="file" name="${5:file_to_send}" $6/>
-		<input type="submit" value="${7:Send}" $8/>
+		<input type="file" name="${4:input--file}" $5/>
+		<input type="submit" value="${6:Send}" $7/>
 	</p>
 </form>
+endsnippet
+
+# ELEMENTS-SPECIAL------------------------
+
+snippet button "button" b
+<button id="$1">$2</button>
+endsnippet
+snippet 'button\s?"([^"\s]+)(?:"\s?"?([^"\s]+))?"?' "button with values" br
+<button id="`!p name=snip.rv=match.group(1)`" name="`!p snip.rv=name`"`!p
+if match.group(2): snip.rv=' value="'+match.group(2)+'"'`>
+	$1
+</button>
 endsnippet
 
 # ---Multi-line elements

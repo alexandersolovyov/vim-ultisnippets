@@ -151,17 +151,19 @@ figure ->
   </figure>
 <
 
-colgroup: ->
+colgroup" ->
 >
   <colgroup>
     <col span="" />
   </colgroup>
 <
 
-Формы - можно через двоеточие указать скрипт, принимающий данные.
+Формы - можно в двойных кавычках указать скрипт, принимающий данные
+(закрывающие кавычки здесь не обязательны, но ошибкой не будут,
+можно ставить пробел перед открывающими кавычками).
 Если не указано - свойство "action" не добавляется.
 
-login-form:handler.php ->
+login-form"handler.php ->
 >
   <form class="{login-form}" action="handler.php" method="post">
     <p>
@@ -177,13 +179,13 @@ login-form:handler.php ->
     </p>
   </form>
 <
-file-form:handler.php ->
+file-form"handler.php ->
 >
   <form class="{file-form}" action="handler.php" enctype="multipart/form-data" method="post">
     <p>
-      <label for="{file_to_send}">{Choose file to send:}</label>
+      <label for="{input--file}">{Choose file to send:}</label>
     <p>
-      <input type="file" name="{file_to_send}" />
+      <input type="file" name="{input--file}" />
       <input type="submit" value="{Send}" />
     </p>
   </form>
@@ -198,9 +200,6 @@ file-form:handler.php ->
 необходимы для него. Для этого нужно ввести название элемента - оно будет развёрнуто
 в шаблон элемента, в котором можно будет переключаться между местами, которые нужно
 заполнить.
-А также часто можно через двоеточие добавить значение некоторого свойства к этому имени, 
-или ещё одного свойства - через ещё одно двоеточие. Значение каких именно свойств идут в
-каком порядке - зависит от элемента.
 Например:
 >
   img
@@ -209,11 +208,20 @@ file-form:handler.php ->
 >
   <img src="" alt="" />
 <
-Значение можно писать в кавычках. Это нужно делать обязательно
-если оно содержит двоеточия и не является последним из возможных в списке
-через двоеточия:
+А также часто можно добавить в двойных кавычках значение некоторого свойства к этому
+имени, или ещё одного свойства - в следующих кавычках. Можно вместо этого использовать
+кавычки как разделитель, или ставить пробел между кавычками. Значение каких именно свойств
+идут в каком порядке - зависит от элемента.
+Например, следующие значения будут значить одно и то-же:
 >
-  img:"http://some_site/myfile.jpg"
+  button"name"value
+  button"name""value"
+  button"name" "value"
+  button "name" "value"
+<
+Рассмотрим это подробнее на примере элемента img:
+>
+  img"http://some_site/myfile.jpg"
 >
 - развернётся в
 >
@@ -221,20 +229,20 @@ file-form:handler.php ->
 <
 а также
 >
-  img:/myfile.jpg:Моя картинка
+  img"/myfile.jpg"Моя картинка
 >
 - развернётся в
 >
   <img src="/myfile.jpg" alt="Моя картинка" />
 <
-и даже
+
+Можно задавать только первое значение свойства. Но второе значение
+без первого задавать нельзя!
+Например:
 >
-  img::Моя картинка
+  img""Моя картинка
 >
-- в
->
-  <img alt="Моя картинка" />
-<
+работать НЕ БУДЕТ!
 
 Контрольные точки перемещения всегда сделаны так, что можно быстро
 добавить ID, класс, или другой атрибут, а также содержимое.
@@ -248,13 +256,19 @@ button ->
 >
   <button id=""></button>
 <
+button"btn-name ->
+>
+  <button id="btn-name">
 
-button:btn-name:val ->
+  </button>
+<
+fbutton"btn-name"val ->
 >
   <button id="btn-name" name="btn-name" value="val">
 
   </button>
 <
+
 
 colgroup ->
 >
@@ -287,17 +301,17 @@ meta-charset ->
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 <
 
-meta-charset:windows-1251 ->
+meta-charset"windows-1251 ->
 >
   <meta http-equiv="Content-Type" content="text/html;charset=windows-1251" />
 <
 
-favicon:icon_file ->
+favicon"icon_file ->
 >
   <link rel="icon_file" type="image/x-icon" href="favicon.ico" />
 <
 
-input:text:input-name:val
+input"text"input-name"val
 >
   <input type="text" id="input-name" name="input-name" value="val" />
 <
@@ -312,7 +326,7 @@ p ->
   <p>
   </p>
 <
-rss:my_rss.xml ->
+rss"my_rss.xml ->
 >
   <link rel="alternate" type="application/rss+xml" title="RSS" href="my_rss.xml" />
 <
@@ -324,7 +338,7 @@ script ->
   </script>
 <
 
-script:file
+script"file
 >
   <script src="file"></script>
 <
@@ -335,17 +349,17 @@ style ->
   </style>
 <
 
-style:file.css ->
+style"file.css ->
 >
   <link rel="stylesheet" type="text/css" href="file.css" />
 <
 
-a:reference ->
+a"reference ->
 >
  <a href="reference"></a>
 <
 
-img:file:alt_text ->
+img"file"alt_text ->
 >
   <img src="flie" alt="alt_text" />
 <
@@ -355,7 +369,7 @@ meta-viewport ->
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <
 
-meta-viewport:non-scalable ->
+meta-viewport"non-scalable ->
 >
       <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 <
