@@ -196,6 +196,122 @@ snippet meta-viewport"ns "meta viewport non-scalable" b
 endsnippet
 
 # ELEMENTS-INLINE-------------------------
+# Expanding only after newline:
+
+
+# ELEMENTS-BLOCK--------------------------
+snippet 'audio((\s?\w+="[^"]+")+)?' "audio" br
+<audio`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</audio>
+endsnippet
+
+snippet 'article((\s?\w+="[^"]+")+)?' "article" br
+<article`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</article>
+endsnippet
+
+snippet 'aside((\s?\w+="[^"]+")+)?' "aside" br
+<aside`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</aside>
+endsnippet
+
+snippet 'blockquote((\s?\w+="[^"]+")+)?' "blockquote" br
+<blockquote`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</blockquote>
+endsnippet
+
+snippet 'body((\s?\w+="[^"]+")+)?' "body" br
+<body`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</body>
+endsnippet
+
+snippet 'canvas((\s?\w+="[^"]+")+)?' "canvas" br
+<canvas`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</canvas>
+endsnippet
+
+snippet 'code((\s?\w+="[^"]+")+)?' "code" br
+<code`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</code>
+endsnippet
+
+snippet 'div((\s?\w+="[^"]+")+)?' "div" br
+<div`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</div>
+endsnippet
+
+snippet 'footer((\s?\w+="[^"]+")+)?' "footer" br
+<footer`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</footer>
+endsnippet
+
+snippet 'header((\s?\w+="[^"]+")+)?' "header" br
+<header`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</header>
+endsnippet
+
+snippet 'html((\s?\w+="[^"]+")+)?' "html" br
+<html`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</html>
+endsnippet
+
+snippet 'main((\s?\w+="[^"]+")+)?' "main" br
+<main`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</main>
+endsnippet
+
+snippet 'section((\s?\w+="[^"]+")+)?' "section" br
+<section`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</section>
+endsnippet
+
+snippet 'tbody((\s?\w+="[^"]+")+)?' "tbody" br
+<tbody`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</tbody>
+endsnippet
+
+snippet 'tfoot((\s?\w+="[^"]+")+)?' "tfoot" br
+<tfoot`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</tfoot>
+endsnippet
+
+snippet 'thead((\s?\w+="[^"]+")+)?' "thead" br
+<thead`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</thead>
+endsnippet
+
+snippet 'video((\s?\w+="[^"]+")+)?' "video" br
+<video`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</video>
+endsnippet
+
+# Compact block elements:
+snippet 'p((\s?\w+="[^"]+")+)?' "p" br
+<p`!p if match.group(1): snip.rv=match.group(1)`>$1
+</p>
+endsnippet
+
+snippet 'dl((\s?\w+="[^"]+")+)?' "dl" br
+<dl`!p if match.group(1): snip.rv=match.group(1)`>$1
+</dl>
+endsnippet
 
 # SPEC_ATRIBUTES--------------------------
 snippet '\s([#.&])([#.&])?([#.&])?([^#.&]+)' "spec attributes" wr
