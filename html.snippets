@@ -198,8 +198,8 @@ endsnippet
 # ELEMENTS-INLINE-------------------------
 
 # SPEC_ATRIBUTES--------------------------
-snippet '([#.&])([#.&])?([#.&])?([^#.&]+)' "spec attributes" wr
-`!p
+snippet '\s([#.&])([#.&])?([#.&])?([^#.&]+)' "spec attributes" wr
+ `!p
 what={'#':'id', '.':'class', '&':'name'}
 snip.rv=what[match.group(1)]+'="'+match.group(4)+'"'
 if match.group(2):
@@ -210,4 +210,6 @@ if match.group(3):
 endsnippet
 
 # ANY_ATRIBUTES---------------------------
-
+snippet '\s(\w+)=(\w[^"]*)' "enclose attributes" wr
+ `!p snip.rv=match.group(1)`="`!p snip.rv=match.group(2)`"
+endsnippet
