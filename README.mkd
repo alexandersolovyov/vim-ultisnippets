@@ -63,7 +63,7 @@ Here are few basic of this snippets:
 - When You enter abbreviation for HTML element, You can add few attribute
   declarations to it, divided by spaces. It will expand to an element with given
   attributes. For example, `h1 class="special"` will expand to
-  `&lt;h1 class="special"&gt;_&lt;/h1&gt;`. And You can even type
+  `<h1 class="special">_</h1>`. And You can even type
   `div .container` and press <kbd>Tab</kbd> <kbd>Tab</kbd> - first Tab will
   expand class declaration and second will expand an element - and it will
   expand to:
