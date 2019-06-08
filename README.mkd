@@ -51,19 +51,28 @@ Features for editing css:
 This snippets are not similar to Emmet, though few of them may be almost
 similar. If You still need emmet, You can install it from
 [it's GitHub page](http://mattn.github.io/emmet-vim) and use it along with
-UltiSnips and this *snippets-UltiSnips* if you like.
+UltiSnips and this *Vim-UltiSnips* snippets if you like.
 
 Here are few basic of this snippets:
 
-- Symbol `.`, `#` or `&` with folowing words will
-  expand to class, ID or name attribute respectively, almost like in Emmet.
+- Symbol `.`, `#` or `&` with folowing words will expand to class, ID or name
+  attribute declaration respectively, almost like in Emmet.
 - You can enter a name of HTML element and press <kbd>Tab</kbd>, and it will
   expand to HTML element with a cursor between tags. Block elements expand only
   on new line, and inline ones can be expanded inside of text.
 - When You enter abbreviation for HTML element, You can add few attribute
   declarations to it, divided by spaces. It will expand to an element with given
-  attributes. For example, *h1 class="special"* will expand to
-  *&lt;h1 class="special"&gt;_&lt;/h1&gt;*.
+  attributes. For example, `h1 class="special"` will expand to
+  `&lt;h1 class="special"&gt;_&lt;/h1&gt;`. And You can even type
+  `div .container` and press <kbd>Tab</kbd> <kbd>Tab</kbd> - first Tab will
+  expand class declaration and second will expand an element - and it will
+  expand to:
+
+~~~html
+  <div class="container">
+    _
+  </div>
+~~~
 
 See help files for further information.
 
@@ -101,10 +110,11 @@ snippets folders in `.vimrc`:
 let g:UltiSnipsSnippetDirectories=[$home.'/.vim/ultisnippets']
 ~~~
 
-There can be added multiple comma-separated paths like this, and UltiSnips will
-scan all these folders for snippets.
+There can be added multiple comma-separated paths in this square brackets, and
+UltiSnips will scan all these folders for snippets.
 
-And don't forget to set up values for UltiSnips in your `.vimrc` file:
+And don't forget to set up values for UltiSnips in your `.vimrc` file, if You
+have not done this:
 
 Define keys, for example:
 
@@ -138,7 +148,8 @@ git clone "https://github.com/alexandersolovyov/snippets-UltiSnips"
 
 Only russian help files are written for now.
 
-To add new help files and index them, just run script from snippets folder:
+To add help files supplied with this *Vim-UltiSnips* snippets and index them,
+just run script from snippets folder:
 
 ~~~sh
 ./refresh_doc.sh
