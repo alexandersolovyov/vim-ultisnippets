@@ -461,7 +461,7 @@ text-transform: `!p snip.rv = expand(match.group(1), {'n':'none','u':'uppercase'
 endsnippet
 
 snippet 'tsha?d?o?w?[:]?' "text-shadow with defaults" br
-text-shadow: ${1:hoff},${2:voff},${3:blur},${4:#000};
+text-shadow: ${1:hoff} ${2:voff} ${3:blur} ${4:#000};
 endsnippet
 snippet 'tsha?d?o?w?[:](.+)' "text-shadow with value" br
 text-shadow: `!p snip.rv = expand(match.group(1), {'n':'none'})`
