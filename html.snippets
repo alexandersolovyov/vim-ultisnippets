@@ -199,27 +199,27 @@ snippet meta-viewport"ns "meta viewport non-scalable" b
 endsnippet
 
 # ELEMENTS-INLINE-------------------------
-snippet '([\s<])strong((\s?\w+="[^"]+")+)?' "strong" wr
+snippet '([\s<])strong((\s\w+="[^"]+")+)?' "strong" wr
 `!p if match.group(1)==' ': snip.rv=' '`<strong`!p if match.group(2): snip.rv=match.group(2)`>$1</strong>
 endsnippet
 
-snippet '([\s<])em((\s?\w+="[^"]+")+)?' "em" wr
+snippet '([\s<])em((\s\w+="[^"]+")+)?' "em" wr
 `!p if match.group(1)==' ': snip.rv=' '`<em`!p if match.group(2): snip.rv=match.group(2)`>$1</em>
 endsnippet
 
-snippet '([\s<])b((\s?\w+="[^"]+")+)?' "b" wr
+snippet '([\s<])b((\s\w+="[^"]+")+)?' "b" wr
 `!p if match.group(1)==' ': snip.rv=' '`<b`!p if match.group(2): snip.rv=match.group(2)`>$1</b>
 endsnippet
 
-snippet '([\s<])i((\s?\w+="[^"]+")+)?' "i" wr
+snippet '([\s<])i((\s\w+="[^"]+")+)?' "i" wr
 `!p if match.group(1)==' ': snip.rv=' '`<i`!p if match.group(2): snip.rv=match.group(2)`>$1</i>
 endsnippet
 
-snippet '([\s<])q((\s?\w+="[^"]+")+)?' "q" wr
+snippet '([\s<])q((\s\w+="[^"]+")+)?' "q" wr
 `!p if match.group(1)==' ': snip.rv=' '`<q`!p if match.group(2): snip.rv=match.group(2)`>$1</q>
 endsnippet
 
-snippet '([\s<])h([1-6])((\s?\w+="[^"]+")+)?' "headers" wr
+snippet '([\s<])h([1-6])((\s\w+="[^"]+")+)?' "headers" wr
 `!p if match.group(1)==' ': snip.rv=' '`<h`!p
 num=match.group(2)
 snip.rv=num
@@ -228,131 +228,131 @@ if match.group(3):
 `>$1</h`!p snip.rv=num`>
 endsnippet
 
-snippet '([\s<])kbd((\s?\w+="[^"]+")+)?' "kbd" wr
+snippet '([\s<])kbd((\s\w+="[^"]+")+)?' "kbd" wr
 `!p if match.group(1)==' ': snip.rv=' '`<kbd`!p if match.group(2): snip.rv=match.group(2)`>$1</kbd>
 endsnippet
 
-snippet '([\s<])span((\s?\w+="[^"]+")+)?' "span" wr
+snippet '([\s<])span((\s\w+="[^"]+")+)?' "span" wr
 `!p if match.group(1)==' ': snip.rv=' '`<span`!p if match.group(2): snip.rv=match.group(2)`>$1</span>
 endsnippet
 
-snippet '([\s<])figcaption((\s?\w+="[^"]+")+)?' "figcaption" wr
+snippet '([\s<])figcaption((\s\w+="[^"]+")+)?' "figcaption" wr
 `!p if match.group(1)==' ': snip.rv=' '`<figcaption`!p if match.group(2): snip.rv=match.group(2)`>$1</figcaption>
 endsnippet
 
 # Expanding only after newline:
-snippet 'dt((\s?\w+="[^"]+")+)?' "dt" br
+snippet 'dt((\s\w+="[^"]+")+)?' "dt" br
 <dt`!p if match.group(1): snip.rv=match.group(1)`>$1</dt>
 endsnippet
 
-snippet 'li((\s?\w+="[^"]+")+)?' "li" br
+snippet 'li((\s\w+="[^"]+")+)?' "li" br
 <li`!p if match.group(1): snip.rv=match.group(1)`>$1</li>
 endsnippet
 
 # ELEMENTS-BLOCK--------------------------
-snippet 'audio((\s?\w+="[^"]+")+)?' "audio" br
+snippet 'audio((\s\w+="[^"]+")+)?' "audio" br
 <audio`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </audio>
 endsnippet
 
-snippet 'article((\s?\w+="[^"]+")+)?' "article" br
+snippet 'article((\s\w+="[^"]+")+)?' "article" br
 <article`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </article>
 endsnippet
 
-snippet 'aside((\s?\w+="[^"]+")+)?' "aside" br
+snippet 'aside((\s\w+="[^"]+")+)?' "aside" br
 <aside`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </aside>
 endsnippet
 
-snippet 'blockquote((\s?\w+="[^"]+")+)?' "blockquote" br
+snippet 'blockquote((\s\w+="[^"]+")+)?' "blockquote" br
 <blockquote`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </blockquote>
 endsnippet
 
-snippet 'body((\s?\w+="[^"]+")+)?' "body" br
+snippet 'body((\s\w+="[^"]+")+)?' "body" br
 <body`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </body>
 endsnippet
 
-snippet 'canvas((\s?\w+="[^"]+")+)?' "canvas" br
+snippet 'canvas((\s\w+="[^"]+")+)?' "canvas" br
 <canvas`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </canvas>
 endsnippet
 
-snippet 'code((\s?\w+="[^"]+")+)?' "code" br
+snippet 'code((\s\w+="[^"]+")+)?' "code" br
 <code`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </code>
 endsnippet
 
-snippet 'div((\s?\w+="[^"]+")+)?' "div" br
+snippet 'div((\s\w+="[^"]+")+)?' "div" br
 <div`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </div>
 endsnippet
 
-snippet 'footer((\s?\w+="[^"]+")+)?' "footer" br
+snippet 'footer((\s\w+="[^"]+")+)?' "footer" br
 <footer`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </footer>
 endsnippet
 
-snippet 'header((\s?\w+="[^"]+")+)?' "header" br
+snippet 'header((\s\w+="[^"]+")+)?' "header" br
 <header`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </header>
 endsnippet
 
-snippet 'main((\s?\w+="[^"]+")+)?' "main" br
+snippet 'main((\s\w+="[^"]+")+)?' "main" br
 <main`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </main>
 endsnippet
 
-snippet 'section((\s?\w+="[^"]+")+)?' "section" br
+snippet 'section((\s\w+="[^"]+")+)?' "section" br
 <section`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </section>
 endsnippet
 
-snippet 'tbody((\s?\w+="[^"]+")+)?' "tbody" br
+snippet 'tbody((\s\w+="[^"]+")+)?' "tbody" br
 <tbody`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </tbody>
 endsnippet
 
-snippet 'tfoot((\s?\w+="[^"]+")+)?' "tfoot" br
+snippet 'tfoot((\s\w+="[^"]+")+)?' "tfoot" br
 <tfoot`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </tfoot>
 endsnippet
 
-snippet 'thead((\s?\w+="[^"]+")+)?' "thead" br
+snippet 'thead((\s\w+="[^"]+")+)?' "thead" br
 <thead`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </thead>
 endsnippet
 
-snippet 'video((\s?\w+="[^"]+")+)?' "video" br
+snippet 'video((\s\w+="[^"]+")+)?' "video" br
 <video`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </video>
 endsnippet
 
 # Compact block elements:
-snippet 'p((\s?\w+="[^"]+")+)?' "p" br
+snippet 'p((\s\w+="[^"]+")+)?' "p" br
 <p`!p if match.group(1): snip.rv=match.group(1)`>$1
 </p>
 endsnippet
 
-snippet 'dd((\s?\w+="[^"]+")+)?' "dd" br
+snippet 'dd((\s\w+="[^"]+")+)?' "dd" br
 <dd`!p if match.group(1): snip.rv=match.group(1)`>$1
 </dd>
 endsnippet
