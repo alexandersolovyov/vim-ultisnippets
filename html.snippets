@@ -310,6 +310,12 @@ snippet 'header((\s\w+="[^"]+")+)?' "header" br
 </header>
 endsnippet
 
+snippet 'nav((\s\w+="[^"]+")+)?' "nav" br
+<nav`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</nav>
+endsnippet
+
 snippet 'main((\s\w+="[^"]+")+)?' "main" br
 <main`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
