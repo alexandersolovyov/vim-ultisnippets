@@ -408,7 +408,7 @@ snippet 'fva?r?i?a?n?t?([:](\w+)?)?' "font-variant" br
 font-variant: `!p snip.rv = expand(match.group(2), {'n':'normal','sc':'small-caps'})`
 endsnippet
 
-snippet 'fze?([:](\S+)?)?' "font-size" br
+snippet 'fze?([:](.+)?)?' "font-size" br
 font-size: `!p if match.group(2): snip.rv = match.group(2)+';'`
 endsnippet
 
