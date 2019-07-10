@@ -334,6 +334,12 @@ snippet 'tbody((\s\w+="[^"]+")+)?' "tbody" br
 </tbody>
 endsnippet
 
+snippet 'td((\s\w+="[^"]+")+)?' "td" br
+<td`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</td>
+endsnippet
+
 snippet 'tfoot((\s\w+="[^"]+")+)?' "tfoot" br
 <tfoot`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
@@ -344,6 +350,12 @@ snippet 'thead((\s\w+="[^"]+")+)?' "thead" br
 <thead`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
 </thead>
+endsnippet
+
+snippet 'tr((\s\w+="[^"]+")+)?' "tr" br
+<tr`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</tr>
 endsnippet
 
 snippet 'video((\s\w+="[^"]+")+)?' "video" br
