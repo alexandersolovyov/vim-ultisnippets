@@ -496,4 +496,5 @@ aside ->
   style="display:none; color:white;"
 <
 
+"vim:tw=78:ts=8:ft=help:norl:colorcolumn=+3:
 
