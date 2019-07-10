@@ -21,7 +21,6 @@ Cодержание
   Строчные элементы			|html-snippets-elements-inline|
   Блочные элементы			|html-snippets-elements-block|
 3.Часто используемые				|html-snippets-misc|
-  Любые элементы			|html-snippets-misc-any_block|
   Особые атрибуты			|html-snippets-misc-spec_attributes|
   Любые атрибуты			|html-snippets-misc-any_attributes|
 
@@ -399,7 +398,6 @@ meta-viewport"ns ->
   li
 <
 
-
 ---------------------
   Блочные элементы			*html-snippets-elements-block*
 
@@ -462,22 +460,6 @@ aside ->
 <
 ================================================================================
 3.Часто используемые				*html-snippets-misc*
-
-  Любые элементы			*html-snippets-misc-any_block*
-Чтобы создать произвольный HTML-элемент, можно ввести
-открывающую угловую скобку и любое слово и нажать <Tab>.
-Например:
->
-  <element
-<
-будет развернуто в
->
- <element>
-
- </element>
-<
-где можно будет перемещаться между местом для ввода атрибутов и местом
-для ввода текста.
 
 ---------------------
   Особые атрибуты			*html-snippets-misc-spec_attributes*
