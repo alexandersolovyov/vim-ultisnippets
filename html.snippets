@@ -173,7 +173,7 @@ snippet 'style\s?"([^\s"]+)"?' "style link" br
 endsnippet
 
 snippet a "anchor" w
-<a href="$1"$2>$3</a>
+<a href="$1"$2>$3${VISUAL}</a>
 endsnippet
 snippet 'a\s?"([^\s"]+)"?' "anchor with URL" wr
 <a href="`!p snip.rv=match.group(1)`"$1>$2</a>
