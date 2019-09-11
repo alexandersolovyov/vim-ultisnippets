@@ -931,7 +931,7 @@ snippet @f+ "@font-face highly compatible" b
 }
 endsnippet
 
-snippet @im?p?o?r?t? "@import" b
+snippet '@im?p?o?r?t?' "@import" br
 @import url($1);
 endsnippet
 
@@ -942,9 +942,15 @@ snippet @kf "@keyframes" b
 }
 endsnippet
 
-snippet @m "@media" b
+snippet '@me?d?i?a?' "@media" br
 @media screen and (${1:max-width}: ${2:480px}) {
 	$3
+}
+endsnippet
+
+snippet @mp "@media print" b
+@media print {
+	$1
 }
 endsnippet
 

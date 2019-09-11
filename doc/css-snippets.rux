@@ -674,7 +674,11 @@ pgba:r		page-break-after: right;
 		  to {  }
 		}
 
-@m, media	@media screen and (max-width: 480px) {
+@m, @media	@media screen and (max-width: 480px) {
+
+		}
+
+@mp		@media print {
 
 		}
 
