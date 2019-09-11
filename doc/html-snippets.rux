@@ -435,6 +435,7 @@ aside ->
   code
   div
   footer
+  form
   header
   nav
   main

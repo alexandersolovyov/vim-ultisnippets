@@ -304,6 +304,12 @@ snippet 'footer((\s\w+="[^"]+")+)?' "footer" br
 </footer>
 endsnippet
 
+snippet 'form((\s\w+="[^"]+")+)?' "form" br
+<form`!p if match.group(1): snip.rv=match.group(1)`>
+	$1
+</form>
+endsnippet
+
 snippet 'header((\s\w+="[^"]+")+)?' "header" br
 <header`!p if match.group(1): snip.rv=match.group(1)`>
 	$1
