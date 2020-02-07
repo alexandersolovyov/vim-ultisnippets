@@ -219,15 +219,6 @@ snippet '(^|[\s<(])q((\s\w+="[^"]+")+)?' "q" wr
 `!p if match.group(1) != '<': snip.rv=match.group(1)`<q`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</q>
 endsnippet
 
-snippet '(^|[\s<(])h([1-6])((\s\w+="[^"]+")+)?' "headers" wr
-`!p if match.group(1) != '<': snip.rv=match.group(1)`<h`!p
-num=match.group(2)
-snip.rv=num
-if match.group(3):
-    snip.rv+=match.group(3)
-`>$1${VISUAL}</h`!p snip.rv=num`>
-endsnippet
-
 snippet '(^|[\s<(])kbd((\s\w+="[^"]+")+)?' "kbd" wr
 `!p if match.group(1) != '<': snip.rv=match.group(1)`<kbd`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</kbd>
 endsnippet
@@ -247,6 +238,15 @@ endsnippet
 
 snippet 'li((\s\w+="[^"]+")+)?' "li" br
 <li`!p if match.group(1): snip.rv=match.group(1)`>$1${VISUAL}</li>
+endsnippet
+
+snippet 'h([1-6])((\s\w+="[^"]+")+)?' "headers" br
+<h`!p
+num=match.group(1)
+snip.rv=num
+if match.group(2):
+    snip.rv+=match.group(2)
+`>$1${VISUAL}</h`!p snip.rv=num`>
 endsnippet
 
 # ELEMENTS-BLOCK--------------------------
