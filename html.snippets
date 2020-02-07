@@ -122,11 +122,11 @@ snippet 'meta-charset\s?"([\w\-]+)"?' "meta tag with any charset" br
 endsnippet
 
 snippet favicon "favicon" b
-<link rel="icon_file" type="image/x-icon" href="$1" />
+<link rel="shortcut icon" type="image/x-icon" href="$1" />
 
 endsnippet
 snippet 'favicon\s?"([^\s"]+)"?' "favicon with URL" br
-<link rel="icon_file" type="image/x-icon" href="`!p if match.group(1): snip.rv=match.group(1)`" />
+<link rel="shortcut icon" type="image/x-icon" href="`!p if match.group(1): snip.rv=match.group(1)`" />
 
 endsnippet
 snippet input "input" b

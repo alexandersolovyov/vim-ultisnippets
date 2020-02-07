@@ -296,9 +296,9 @@ meta-charset"windows-1251 ->
   <meta http-equiv="Content-Type" content="text/html;charset=windows-1251" />
 <
 
-favicon"icon_file ->
+favicon"icon_file.ico ->
 >
-  <link rel="icon_file" type="image/x-icon" href="favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="icon_file.ico" />
 <
 
 input"text"input-name"val
