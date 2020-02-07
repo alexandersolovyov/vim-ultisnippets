@@ -172,11 +172,11 @@ snippet 'style\s?"([^\s"]+)"?' "style link" br
 <link rel="stylesheet" type="text/css" href="`!p snip.rv=match.group(1)`" />
 endsnippet
 
-snippet a "anchor" w
-<a href="$1"$2>$3${VISUAL}</a>
+snippet '(^|[\s(])a' "anchor" wr
+`!p snip.rv=match.group(1)`<a href="$1"$2>$3${VISUAL}</a>
 endsnippet
-snippet 'a\s?"([^\s"]+)"?' "anchor with URL" wr
-<a href="`!p snip.rv=match.group(1)`"$1>$2</a>
+snippet '(^|[\s(])a\s?"([^\s"]+)"?' "anchor with URL" wr
+`!p snip.rv=match.group(1)`<a href="`!p snip.rv=match.group(2)`"$1>$2</a>
 endsnippet
 
 snippet img "img" b
