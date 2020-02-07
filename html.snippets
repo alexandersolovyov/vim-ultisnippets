@@ -199,28 +199,28 @@ snippet meta-viewport"ns "meta viewport non-scalable" b
 endsnippet
 
 # ELEMENTS-INLINE-------------------------
-snippet '([\s<])strong((\s\w+="[^"]+")+)?' "strong" wr
-`!p if match.group(1)==' ': snip.rv=' '`<strong`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</strong>
+snippet '(^|[\s<(])strong((\s\w+="[^"]+")+)?' "strong" wr
+`!p if match.group(1) != '<': snip.rv=match.group(1)`<strong`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</strong>
 endsnippet
 
-snippet '([\s<])em((\s\w+="[^"]+")+)?' "em" wr
-`!p if match.group(1)==' ': snip.rv=' '`<em`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</em>
+snippet '(^|[\s<(])em((\s\w+="[^"]+")+)?' "em" wr
+`!p if match.group(1) != '<': snip.rv=match.group(1)`<em`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</em>
 endsnippet
 
-snippet '([\s<])b((\s\w+="[^"]+")+)?' "b" wr
-`!p if match.group(1)==' ': snip.rv=' '`<b`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</b>
+snippet '(^|[\s<(])b((\s\w+="[^"]+")+)?' "b" wr
+`!p if match.group(1) != '<': snip.rv=match.group(1)`<b`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</b>
 endsnippet
 
-snippet '([\s<])i((\s\w+="[^"]+")+)?' "i" wr
-`!p if match.group(1)==' ': snip.rv=' '`<i`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</i>
+snippet '(^|[\s<(])i((\s\w+="[^"]+")+)?' "i" wr
+`!p if match.group(1) != '<': snip.rv=match.group(1)`<i`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</i>
 endsnippet
 
-snippet '([\s<])q((\s\w+="[^"]+")+)?' "q" wr
-`!p if match.group(1)==' ': snip.rv=' '`<q`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</q>
+snippet '(^|[\s<(])q((\s\w+="[^"]+")+)?' "q" wr
+`!p if match.group(1) != '<': snip.rv=match.group(1)`<q`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</q>
 endsnippet
 
-snippet '([\s<])h([1-6])((\s\w+="[^"]+")+)?' "headers" wr
-`!p if match.group(1)==' ': snip.rv=' '`<h`!p
+snippet '(^|[\s<(])h([1-6])((\s\w+="[^"]+")+)?' "headers" wr
+`!p if match.group(1) != '<': snip.rv=match.group(1)`<h`!p
 num=match.group(2)
 snip.rv=num
 if match.group(3):
@@ -228,16 +228,16 @@ if match.group(3):
 `>$1${VISUAL}</h`!p snip.rv=num`>
 endsnippet
 
-snippet '([\s<])kbd((\s\w+="[^"]+")+)?' "kbd" wr
-`!p if match.group(1)==' ': snip.rv=' '`<kbd`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</kbd>
+snippet '(^|[\s<(])kbd((\s\w+="[^"]+")+)?' "kbd" wr
+`!p if match.group(1) != '<': snip.rv=match.group(1)`<kbd`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</kbd>
 endsnippet
 
-snippet '([\s<])span((\s\w+="[^"]+")+)?' "span" wr
-`!p if match.group(1)==' ': snip.rv=' '`<span`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</span>
+snippet '(^|[\s<(])span((\s\w+="[^"]+")+)?' "span" wr
+`!p if match.group(1) != '<': snip.rv=match.group(1)`<span`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</span>
 endsnippet
 
-snippet '([\s<])figcaption((\s\w+="[^"]+")+)?' "figcaption" wr
-`!p if match.group(1)==' ': snip.rv=' '`<figcaption`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</figcaption>
+snippet '(^|[\s<(])figcaption((\s\w+="[^"]+")+)?' "figcaption" wr
+`!p if match.group(1) != '<': snip.rv=match.group(1)`<figcaption`!p if match.group(2): snip.rv=match.group(2)`>$1${VISUAL}</figcaption>
 endsnippet
 
 # Expanding only after newline:
