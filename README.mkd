@@ -76,6 +76,16 @@ Here are few basic of this snippets:
 
 See help files for further information.
 
+### JavaScript
+
+Only basic snippets are written. Here are some of them:
+
+- Single quote `'` expands to double single quotes. So does `"` symbol - for comfort
+  writing in russian.
+- Curly brace `{` expands to two ones - to create a block of code.
+- Letter `f` (after whitespace) expands to function definition with `function`
+  keywoard, round braces and a block of code.
+
 ## Installation
 
 I assume that you are using one of Linux desktop pcs, but this also must work
