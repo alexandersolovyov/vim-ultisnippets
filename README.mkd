@@ -41,8 +41,9 @@ Features for editing css:
 - Set of snippets defers from original Emmet: there are no abbreviations for
   very bad supported properties, and added abbreviations for some new properties
   (for Grid, as an example).
-- Few abbreviations defers from original Emmet - abbreviations for property
-  values at most.
+- Few abbreviations defers from original Emmet: `border-radius` expands from
+  `bdra` or `bra` (instead of `bdrs`), and some  abbreviations for property
+  values are different.
 - When snippet has expanded, and that snippet needs you to finish the string -
   it will not add a semicolon or a closing bracket after cursor.
 

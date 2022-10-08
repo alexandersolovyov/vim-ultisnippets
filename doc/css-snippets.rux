@@ -246,6 +246,7 @@ bds:r		border-style: ridge;
 bds:i		border-style: inset;
 bds:o		border-style: outset;
 bdw		border-width:
+bra, bdra	border-radius:
 
 bt, bdt		border-top: 1px solid #000;
 bdt:n		border-top: none;

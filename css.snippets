@@ -230,6 +230,10 @@ snippet 'bdwi?d?t?h?([:](\S+)?)?' "border-width" br
 border-width: `!p if match.group(2): snip.rv = match.group(2)+';'`
 endsnippet
 
+snippet 'bd?rad?i?u?s?([:](.+)?)?' "font-size" br
+border-radius: `!p if match.group(2): snip.rv = match.group(2)+';'`
+endsnippet
+
 
 # Border-top family
 
