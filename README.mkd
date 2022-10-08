@@ -81,8 +81,8 @@ See help files for further information.
 
 Only basic snippets are written. Here are some of them:
 
-- Single quote `'` expands to double single quotes. So does `"` symbol - for comfort
-  writing in russian.
+- Single quote `'` expands to two single quotes and puts the cursor between
+  them. So does `"` symbol - for more comfortable writing in Russian.
 - Curly brace `{` expands to two ones - to create a block of code.
 - Letter `f` (after whitespace) expands to function definition with `function`
   keywoard, round braces and a block of code.
